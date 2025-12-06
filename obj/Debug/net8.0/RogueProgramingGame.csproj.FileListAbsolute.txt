@@ -12,3 +12,4 @@ C:\Users\famil\OneDrive\Documentos\Programação\Estudos\C#\RogueProgramingGame\
 C:\Users\famil\OneDrive\Documentos\Programação\Estudos\C#\RogueProgramingGame\obj\Debug\net8.0\RogueProgramingGame.pdb
 C:\Users\famil\OneDrive\Documentos\Programação\Estudos\C#\RogueProgramingGame\obj\Debug\net8.0\RogueProgramingGame.genruntimeconfig.cache
 C:\Users\famil\OneDrive\Documentos\Programação\Estudos\C#\RogueProgramingGame\obj\Debug\net8.0\ref\RogueProgramingGame.dll
+C:\Users\famil\OneDrive\Documentos\Programação\Estudos\C#\RogueProgramingGame\obj\Debug\net8.0\RogueProgramingGame.sourcelink.json
