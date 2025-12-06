@@ -2,7 +2,7 @@
 
 class Player {
     public string Name;
-    public string Gender;
+    public char Gender = 'M';
     public string PlayerClass;
     public int Hp = 10;
     public int Str;
@@ -20,18 +20,41 @@ class RogueProgramingGame {
             menu = int.Parse(Console.ReadLine());
 
             if (menu == 1) {
+                char playerGenderChecker;
+                
+
                 Console.Clear();
                 Console.Write("Digite seu nome: ");
-                Jogador.Name = Console.ReadLine();
+                Jogador.Name = Console.ReadLine(); 
 
-                Console.Write("Qual seu gênero: ");
-                Jogador.Gender = Console.ReadLine();
-
-                Console.WriteLine($"Muito prazer {Jogador.Name}, vamos começar nossa aventura, mas antes escolha sua classe:\n");
-
-                int playerClassChecker;
                 while (true) {
-                    Console.Write("1 - Guerreiro\n2 - Tank\n3 - Ladino\nSua classe será: ");
+                    Console.Write("Qual seu gênero (M/F): ");
+                    playerGenderChecker = (char)Console.Read();
+                    Console.ReadLine(); //Limpa o "buffer"
+
+                    if (playerGenderChecker == 'F' || playerGenderChecker == 'f') {
+                        Jogador.Gender = 'F';
+                        Console.Write("Muito prazer ");
+                        Console.ForegroundColor = ConsoleColor.Magenta;
+                        break;
+                    }
+                    else if (playerGenderChecker == 'M' || playerGenderChecker == 'm') {
+                        Jogador.Gender = 'M';
+                        Console.Write("Muito prazer ");
+                        Console.ForegroundColor = ConsoleColor.Blue;
+                        break;
+                    }
+                    else {
+                        Console.WriteLine("Não identificado, por favor digite uma opção válida.\n");
+                    }
+                }
+                Console.Write(Jogador.Name);
+                Console.ResetColor();
+                Console.Write(" vamos começar nossa aventura, mas antes escolha sua classe:\n");
+
+                int playerClassChecker = 0;
+                while (true) {
+                    Console.Write("1 - Guerreiro\n2 - Tank\n3 - Ladino\nSua classe será: \n");
                     playerClassChecker = int.Parse(Console.ReadLine());
 
                     if (playerClassChecker == 1) {
@@ -66,6 +89,8 @@ class RogueProgramingGame {
 
                 Console.WriteLine($"Você jogará como {Jogador.PlayerClass}, excelente escolha! Agora sim podemos dar inicio a sua jornada.");
                 break;
+
+                //TODO Adicionar uma história bem curta e um sistema de pancadaria
             }
             else if (menu == 2) {
                 Console.WriteLine("Nada por aqui ainda");
