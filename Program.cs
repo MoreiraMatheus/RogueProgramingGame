@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Channels;
 
 class Player {
     public string Name;
@@ -8,6 +9,8 @@ class Player {
     public int Str;
     public int Def;
     public int Spd;
+    public int Xp;
+    //Adicionar função que apresente os dados do player
 }
 
 class RogueProgramingGame {
@@ -86,19 +89,87 @@ class RogueProgramingGame {
                         Console.WriteLine("Escolha uma classe válida.\n");
                     }
                 }
+                Console.Clear();
+                Console.WriteLine($"Você jogará como {Jogador.PlayerClass}, excelente escolha! Agora sim podemos dar inicio a sua jornada.\n");
+                Console.WriteLine("Você está em uma floresta, olha ao seu redor e não vê nada, a não ser um inimigo, um Goblin!");
 
-                Console.WriteLine($"Você jogará como {Jogador.PlayerClass}, excelente escolha! Agora sim podemos dar inicio a sua jornada.");
+                //TODO fazer uma função que simule as lutas contra os inimigos
+
+                //Inimigo 1
+                int playerChoiceChecker = 0;
+                while (true) {
+                    Console.WriteLine("O que você faz?\n1 - Atacar\n2 - Defender");
+                    playerChoiceChecker = int.Parse(Console.ReadLine());
+                    if (playerChoiceChecker == 1) {
+                        Console.Clear();
+                        Console.WriteLine("O goblin foi derrotado, parabéns!");
+                        break;
+                    }
+                    else if(playerChoiceChecker == 2){
+                        Console.Clear();
+                        Console.WriteLine("O Goblin te encara, desconfiado.");
+                    }
+                    else {
+                        Console.Clear();
+                        Console.WriteLine("Escolha uma opção válida.");
+                    }
+                }
+
+                //Inimigo 2
+                Console.WriteLine("Seguindo adiante você encontra com outro inimigo, dessa vez um Troll!");
+                playerChoiceChecker = 0;
+                while (true) {
+                    Console.WriteLine("O que você faz?\n1 - Atacar\n2 - Defender");
+                    playerChoiceChecker = int.Parse(Console.ReadLine());
+                    if (playerChoiceChecker == 1) {
+                        Console.Clear();
+                        Console.WriteLine("O Troll foi derrotado, parabéns!");
+                        break;
+                    }
+                    else if (playerChoiceChecker == 2) {
+                        Console.Clear();
+                        Console.WriteLine("O Troll te encara, desconfiado.");
+                    }
+                    else {
+                        Console.Clear();
+                        Console.WriteLine("Escolha uma opção válida.");
+                    }
+                }
+
+                //Inimigo 3
+                Console.WriteLine("Após derrotar o troll você encontra com seu inimigo final, um poderoso golem de pedra!");
+                playerChoiceChecker = 0;
+                while (true) {
+                    Console.WriteLine("O que você faz?\n1 - Atacar\n2 - Defender");
+                    playerChoiceChecker = int.Parse(Console.ReadLine());
+                    if (playerChoiceChecker == 1) {
+                        Console.Clear();
+                        Console.WriteLine("O golem foi derrotado, parabéns!");
+                        break;
+                    }
+                    else if (playerChoiceChecker == 2) {
+                        Console.Clear();
+                        Console.WriteLine("O golem te encara, desconfiado.");
+                    }
+                    else {
+                        Console.Clear();
+                        Console.WriteLine("Escolha uma opção válida.");
+                    }
+                }
+
+                Console.WriteLine("Você chegou até o fim da sua jornada.");
                 break;
-
-                //TODO Adicionar uma história bem curta e um sistema de pancadaria
             }
             else if (menu == 2) {
                 Console.WriteLine("Nada por aqui ainda");
                 break;
             }
-            else {
+            else if (menu == 3) {
                 break;
             }   
+            else if (menu == 4) {
+                Console.WriteLine("Debug, use essa parte do código para testar funções");
+            }
         }
 
         Console.WriteLine("\nFim do programa");
