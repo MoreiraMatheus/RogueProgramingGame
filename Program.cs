@@ -3,14 +3,49 @@ using System.Threading.Channels;
 
 class Player {
     public string Name;
-    public char Gender = 'M';
+    public char Gender;
     public string PlayerClass;
     public int Hp = 10;
-    public int Str;
-    public int Def;
-    public int Spd;
-    public int Xp;
-    //Adicionar função que apresente os dados do player
+    public int MaxHp = 10;
+    public int Str = 0;
+    public int Def = 0;
+    public int Spd = 0;
+    public int Xp = 0;
+    public void ShowPlayerStats() {
+        //TODO Revisar essa função para poder fechar a caixa de informações do player
+        Console.Write(" - ");
+        if (this.Gender == 'F') {
+            Console.ForegroundColor = ConsoleColor.Magenta;
+        }
+        else{
+            Console.ForegroundColor = ConsoleColor.Blue;
+        }
+        Console.Write(this.Name);
+        Console.ResetColor();
+        Console.Write($" - {this.PlayerClass} ");
+        for (int i = 0; i< 92 - this.Name.Length - this.PlayerClass.Length; i++) {
+            Console.Write("-");
+        }
+        Console.Write("\n|\n| HP: ");
+        Console.ForegroundColor = ConsoleColor.Green;
+        for (int i = 0; i<this.Hp; i++) {
+            Console.Write("/");
+        }
+        Console.ResetColor();
+        if (this.Hp != this.MaxHp) {
+            for (int i = 0; i<this.MaxHp - this.Hp; i++) {
+                Console.Write("/");
+            }
+        }
+        Console.WriteLine($"\n| STR: {this.Str} DEF: {this.Def} SPD: {this.Spd}\n|");
+        Console.Write(" ");
+        for (int i = 0; i < 98; i++) {
+            Console.Write("-");
+        }
+        Console.Write("\n");
+    }
+
+    //TODO Criar função para atualizar as informações do jogador
 }
 
 class RogueProgramingGame {
@@ -23,13 +58,12 @@ class RogueProgramingGame {
             menu = int.Parse(Console.ReadLine());
 
             if (menu == 1) {
-                char playerGenderChecker;
-                
-
                 Console.Clear();
+                //TODO Validar se o nome do usuário está certo
                 Console.Write("Digite seu nome: ");
                 Jogador.Name = Console.ReadLine(); 
 
+                char playerGenderChecker;
                 while (true) {
                     Console.Write("Qual seu gênero (M/F): ");
                     playerGenderChecker = (char)Console.Read();
@@ -62,14 +96,16 @@ class RogueProgramingGame {
 
                     if (playerClassChecker == 1) {
                         Jogador.Hp += 2;
+                        Jogador.MaxHp += 2;
                         Jogador.Str = 5;
                         Jogador.Def = 2;
                         Jogador.Spd = 1;
-                        Jogador.PlayerClass = "Guerreiro";
+                        Jogador.PlayerClass = "Guerreiro(a)";
                         break;
                     }
                     else if (playerClassChecker == 2) {
                         Jogador.Hp += 2;
+                        Jogador.MaxHp += 2;
                         Jogador.Str = 2;
                         Jogador.Def = 5;
                         Jogador.Spd = 1;
@@ -78,10 +114,11 @@ class RogueProgramingGame {
                     }
                     else if (playerClassChecker == 3) {
                         Jogador.Hp ++;
+                        Jogador.MaxHp ++;
                         Jogador.Str = 3;
                         Jogador.Def = 1;
                         Jogador.Spd = 5;
-                        Jogador.PlayerClass = "Ladino";
+                        Jogador.PlayerClass = "Ladino(a)";
                         break;
                     }
                     else {
@@ -90,6 +127,7 @@ class RogueProgramingGame {
                     }
                 }
                 Console.Clear();
+                Jogador.ShowPlayerStats();
                 Console.WriteLine($"Você jogará como {Jogador.PlayerClass}, excelente escolha! Agora sim podemos dar inicio a sua jornada.\n");
                 Console.WriteLine("Você está em uma floresta, olha ao seu redor e não vê nada, a não ser um inimigo, um Goblin!");
 
@@ -171,7 +209,6 @@ class RogueProgramingGame {
                 Console.WriteLine("Debug, use essa parte do código para testar funções");
             }
         }
-
         Console.WriteLine("\nFim do programa");
     }
 }
