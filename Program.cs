@@ -53,15 +53,34 @@ class RogueProgramingGame {
         Player Jogador = new Player();
 
         while (true) {
+            //TODO Apresentar o menu inicial de forma mais amigável
             int menu;
-            Console.Write("1 - Novo Jogo\n2 - Carregar\n3 - Sair\nSelecione uma opção: ");
+            Console.Write(" 1 - Novo Jogo\n 2 - Carregar\n 3 - Sair\nSelecione uma opção: ");
             menu = int.Parse(Console.ReadLine());
 
             if (menu == 1) {
                 Console.Clear();
-                //TODO Validar se o nome do usuário está certo
-                Console.Write("Digite seu nome: ");
-                Jogador.Name = Console.ReadLine(); 
+
+                string PlayerNameChecker;
+                while (true) {
+                    Console.Write("Digite seu nome: ");
+                    PlayerNameChecker = Console.ReadLine();
+                    PlayerNameChecker = PlayerNameChecker.Trim();
+                    PlayerNameChecker = PlayerNameChecker.ToLower();
+                    if (PlayerNameChecker == "") {
+                        Console.Clear();
+                        Console.WriteLine("O nome do jogador é obrigatório.");
+                    }
+                    else if (PlayerNameChecker.Length > 20) {
+                        Console.Clear();
+                        Console.WriteLine("Por favor, digite um nome menor (limite de 20 caracteres).");
+                    }
+                    else {
+                        PlayerNameChecker = PlayerNameChecker.ToUpper().Substring(0,1) + PlayerNameChecker.Substring(1, PlayerNameChecker.Length - 1);
+                        Jogador.Name = PlayerNameChecker;
+                        break;
+                    }
+                }
 
                 char playerGenderChecker;
                 while (true) {
@@ -91,7 +110,7 @@ class RogueProgramingGame {
 
                 int playerClassChecker = 0;
                 while (true) {
-                    Console.Write("1 - Guerreiro\n2 - Tank\n3 - Ladino\nSua classe será: \n");
+                    Console.Write("1 - Guerreiro\n2 - Tank\n3 - Ladino\nSua classe será: ");
                     playerClassChecker = int.Parse(Console.ReadLine());
 
                     if (playerClassChecker == 1) {
