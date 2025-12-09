@@ -12,7 +12,6 @@ class Player {
     public int Spd = 0;
     public int Xp = 0;
     public void ShowPlayerStats() {
-        //TODO Revisar essa função para poder fechar a caixa de informações do player
         Console.Write(" - ");
         if (this.Gender == 'F') {
             Console.ForegroundColor = ConsoleColor.Magenta;
@@ -23,10 +22,11 @@ class Player {
         Console.Write(this.Name);
         Console.ResetColor();
         Console.Write($" - {this.PlayerClass} ");
-        for (int i = 0; i< 92 - this.Name.Length - this.PlayerClass.Length; i++) {
+        for (int i = 0; i< 42 - this.Name.Length - this.PlayerClass.Length; i++) {
             Console.Write("-");
         }
-        Console.Write("\n|\n| HP: ");
+        Console.WriteLine("\n|                                                |");
+        Console.Write("| HP: ");
         Console.ForegroundColor = ConsoleColor.Green;
         for (int i = 0; i<this.Hp; i++) {
             Console.Write("/");
@@ -37,15 +37,26 @@ class Player {
                 Console.Write("/");
             }
         }
-        Console.WriteLine($"\n| STR: {this.Str} DEF: {this.Def} SPD: {this.Spd}\n|");
-        Console.Write(" ");
-        for (int i = 0; i < 98; i++) {
+        for (int i = 0; i < 43 - this.MaxHp; i++) {
+            Console.Write(" ");
+        }
+        Console.Write($"|\n| STR: {this.Str} DEF: {this.Def} SPD: {this.Spd}");
+        for (int i = 0; i < 30 - this.Str.ToString().Length - this.Def.ToString().Length - this.Spd.ToString().Length; i++) {
+            Console.Write(" ");
+        }
+        Console.Write("|\n|                                                |\n ");
+        for (int i = 0; i < 48; i++) {
             Console.Write("-");
         }
         Console.Write("\n");
     }
 
     //TODO Criar função para atualizar as informações do jogador
+}
+
+class Enemy {
+    public string Name;
+    //TODO criar inimigos aqui
 }
 
 class RogueProgramingGame {
@@ -101,6 +112,7 @@ class RogueProgramingGame {
                         break;
                     }
                     else {
+                        Console.Clear();
                         Console.WriteLine("Não identificado, por favor digite uma opção válida.\n");
                     }
                 }
@@ -224,9 +236,14 @@ class RogueProgramingGame {
             else if (menu == 3) {
                 break;
             }   
-            else if (menu == 4) {
+            else if (menu == 999) {
                 Console.WriteLine("Debug, use essa parte do código para testar funções");
             }
+            else {
+                Console.Clear();
+                Console.WriteLine("Digite uma opção válida.\n");
+            }
+
         }
         Console.WriteLine("\nFim do programa");
     }
