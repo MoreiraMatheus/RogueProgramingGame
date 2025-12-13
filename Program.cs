@@ -49,14 +49,19 @@ class Player {
             Console.Write("-");
         }
         Console.Write("\n");
-    }
-
-    //TODO Criar função para atualizar as informações do jogador
+    } 
 }
 
 class Enemy {
     public string Name;
+    public int Hp;
+    public int MaxHp;
     //TODO criar inimigos aqui
+
+}
+
+class Inteface {
+    //TODO criar "interfaces" aqui
 }
 
 class RogueProgramingGame {
@@ -64,10 +69,66 @@ class RogueProgramingGame {
         Player Jogador = new Player();
 
         while (true) {
-            //TODO Apresentar o menu inicial de forma mais amigável
-            int menu;
-            Console.Write(" 1 - Novo Jogo\n 2 - Carregar\n 3 - Sair\nSelecione uma opção: ");
-            menu = int.Parse(Console.ReadLine());
+            int menu = 1;
+            Console.WriteLine("\t\tRogue Programing Game\n");
+            Console.WriteLine("--> 1 - Novo Jogo\n    2 - Carregar\n    3 - Sair");
+            Console.WriteLine("==================================================");
+            while (true) {
+                ConsoleKeyInfo keyboardChoice = Console.ReadKey();
+                if (keyboardChoice.Key == ConsoleKey.UpArrow) {
+                    if (menu > 1) {
+                        menu--;
+                    }
+                    if (menu == 1) {
+                        Console.Clear();
+                        Console.WriteLine("\t\tRogue Programing Game\n");
+                        Console.WriteLine("--> 1 - Novo Jogo\n    2 - Carregar\n    3 - Sair");
+                        Console.WriteLine("==================================================");
+                    }
+                    else if (menu == 2) {
+                        Console.Clear();
+                        Console.WriteLine("\t\tRogue Programing Game\n");
+                        Console.WriteLine("    1 - Novo Jogo\n--> 2 - Carregar\n    3 - Sair");
+                        Console.WriteLine("==================================================");
+                    }
+                    else if (menu == 3) {
+                        Console.Clear();
+                        Console.WriteLine("\t\tRogue Programing Game\n");
+                        Console.WriteLine("    1 - Novo Jogo\n    2 - Carregar\n--> 3 - Sair");
+                        Console.WriteLine("==================================================");
+                    }
+                }
+                else if (keyboardChoice.Key == ConsoleKey.DownArrow) {
+                    if (menu < 3) {
+                        menu++;
+                    }
+                    if (menu == 1) {
+                        Console.Clear();
+                        Console.WriteLine("\t\tRogue Programing Game\n");
+                        Console.WriteLine("--> 1 - Novo Jogo\n    2 - Carregar\n    3 - Sair");
+                        Console.WriteLine("==================================================");
+                    }
+                    else if (menu == 2) {
+                        Console.Clear();
+                        Console.WriteLine("\t\tRogue Programing Game\n");
+                        Console.WriteLine("    1 - Novo Jogo\n--> 2 - Carregar\n    3 - Sair");
+                        Console.WriteLine("==================================================");
+                    }
+                    else if (menu == 3) {
+                        Console.Clear();
+                        Console.WriteLine("\t\tRogue Programing Game\n");
+                        Console.WriteLine("    1 - Novo Jogo\n    2 - Carregar\n--> 3 - Sair");
+                        Console.WriteLine("==================================================");
+                    }
+                }
+                else if (keyboardChoice.Key == ConsoleKey.Enter) {
+                    Console.Clear();
+                    break;
+                }
+                else {
+                    Console.WriteLine("Tecla não identificada");
+                }
+            }
 
             if (menu == 1) {
                 Console.Clear();
@@ -93,6 +154,7 @@ class RogueProgramingGame {
                     }
                 }
 
+                Console.Clear();
                 char playerGenderChecker;
                 while (true) {
                     Console.Write("Qual seu gênero (M/F): ");
@@ -100,12 +162,14 @@ class RogueProgramingGame {
                     Console.ReadLine(); //Limpa o "buffer"
 
                     if (playerGenderChecker == 'F' || playerGenderChecker == 'f') {
+                        Console.Clear();
                         Jogador.Gender = 'F';
                         Console.Write("Muito prazer ");
                         Console.ForegroundColor = ConsoleColor.Magenta;
                         break;
                     }
                     else if (playerGenderChecker == 'M' || playerGenderChecker == 'm') {
+                        Console.Clear();
                         Jogador.Gender = 'M';
                         Console.Write("Muito prazer ");
                         Console.ForegroundColor = ConsoleColor.Blue;
@@ -234,15 +298,9 @@ class RogueProgramingGame {
                 break;
             }
             else if (menu == 3) {
+                Console.WriteLine("Saindo...");
                 break;
             }   
-            else if (menu == 999) {
-                Console.WriteLine("Debug, use essa parte do código para testar funções");
-            }
-            else {
-                Console.Clear();
-                Console.WriteLine("Digite uma opção válida.\n");
-            }
 
         }
         Console.WriteLine("\nFim do programa");
