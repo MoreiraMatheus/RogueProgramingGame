@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection.Metadata;
 using System.Threading.Channels;
 
 class Player {
@@ -60,73 +61,59 @@ class Enemy {
 
 }
 
-class Inteface {
-    //TODO criar "interfaces" aqui
+class Interface {
+    public void Cabecalho(){
+        Console.WriteLine("\t\tRogue Programing Game\n");
+    }
+    public void Divider(int tamanho = 50) {
+        for (int i = 0; i < tamanho; i++) {
+            Console.Write("-");
+        }
+        Console.Write("\n");
+    }
+    public void Choices(int numberChoiced, string[] choices) {
+        string mensagemApresentada = "";
+        for (int i= 0; i < choices.Length; i++) {
+            mensagemApresentada += $"    {i + 1} - {choices[i]}\n";
+        }
+        Console.WriteLine(mensagemApresentada.Replace($"    {numberChoiced}", $"--> {numberChoiced}"));
+    }
 }
 
 class RogueProgramingGame {
     static void Main() {
         Player Jogador = new Player();
+        Interface Tela = new Interface();
+        ConsoleKeyInfo keyboardChoice;
 
         while (true) {
             int menu = 1;
-            Console.WriteLine("\t\tRogue Programing Game\n");
-            Console.WriteLine("--> 1 - Novo Jogo\n    2 - Carregar\n    3 - Sair");
-            Console.WriteLine("==================================================");
+            Tela.Cabecalho();
+            Tela.Choices(menu, ["Novo Jogo", "Carregar", "Sair"]);
+            Tela.Divider();
             while (true) {
-                ConsoleKeyInfo keyboardChoice = Console.ReadKey();
+                keyboardChoice = Console.ReadKey();
                 if (keyboardChoice.Key == ConsoleKey.UpArrow) {
                     if (menu > 1) {
                         menu--;
                     }
-                    if (menu == 1) {
-                        Console.Clear();
-                        Console.WriteLine("\t\tRogue Programing Game\n");
-                        Console.WriteLine("--> 1 - Novo Jogo\n    2 - Carregar\n    3 - Sair");
-                        Console.WriteLine("==================================================");
-                    }
-                    else if (menu == 2) {
-                        Console.Clear();
-                        Console.WriteLine("\t\tRogue Programing Game\n");
-                        Console.WriteLine("    1 - Novo Jogo\n--> 2 - Carregar\n    3 - Sair");
-                        Console.WriteLine("==================================================");
-                    }
-                    else if (menu == 3) {
-                        Console.Clear();
-                        Console.WriteLine("\t\tRogue Programing Game\n");
-                        Console.WriteLine("    1 - Novo Jogo\n    2 - Carregar\n--> 3 - Sair");
-                        Console.WriteLine("==================================================");
-                    }
+                    Console.Clear();
+                    Tela.Cabecalho();
+                    Tela.Choices(menu, ["Novo Jogo", "Carregar", "Sair"]);
+                    Tela.Divider();
                 }
                 else if (keyboardChoice.Key == ConsoleKey.DownArrow) {
                     if (menu < 3) {
                         menu++;
                     }
-                    if (menu == 1) {
-                        Console.Clear();
-                        Console.WriteLine("\t\tRogue Programing Game\n");
-                        Console.WriteLine("--> 1 - Novo Jogo\n    2 - Carregar\n    3 - Sair");
-                        Console.WriteLine("==================================================");
-                    }
-                    else if (menu == 2) {
-                        Console.Clear();
-                        Console.WriteLine("\t\tRogue Programing Game\n");
-                        Console.WriteLine("    1 - Novo Jogo\n--> 2 - Carregar\n    3 - Sair");
-                        Console.WriteLine("==================================================");
-                    }
-                    else if (menu == 3) {
-                        Console.Clear();
-                        Console.WriteLine("\t\tRogue Programing Game\n");
-                        Console.WriteLine("    1 - Novo Jogo\n    2 - Carregar\n--> 3 - Sair");
-                        Console.WriteLine("==================================================");
-                    }
+                    Console.Clear();
+                    Tela.Cabecalho();
+                    Tela.Choices(menu, ["Novo Jogo", "Carregar", "Sair"]);
+                    Tela.Divider();
                 }
                 else if (keyboardChoice.Key == ConsoleKey.Enter) {
                     Console.Clear();
                     break;
-                }
-                else {
-                    Console.WriteLine("Tecla não identificada");
                 }
             }
 
@@ -155,65 +142,73 @@ class RogueProgramingGame {
                 }
 
                 Console.Clear();
-                char playerGenderChecker;
+                int playerGenderChecker = 1;
+                Console.WriteLine("Qual seu gênero: ");
+                Tela.Choices(playerGenderChecker, ["M", "F"]);
                 while (true) {
-                    Console.Write("Qual seu gênero (M/F): ");
-                    playerGenderChecker = (char)Console.Read();
-                    Console.ReadLine(); //Limpa o "buffer"
+                    keyboardChoice = Console.ReadKey();
 
-                    if (playerGenderChecker == 'F' || playerGenderChecker == 'f') {
+                    if (keyboardChoice.Key == ConsoleKey.UpArrow) {
+                        playerGenderChecker = 1;
                         Console.Clear();
-                        Jogador.Gender = 'F';
-                        Console.Write("Muito prazer ");
-                        Console.ForegroundColor = ConsoleColor.Magenta;
-                        break;
+                        Console.WriteLine("Qual seu gênero:");
+                        Tela.Choices(playerGenderChecker, ["M", "F"]);
+                        Tela.Divider();
                     }
-                    else if (playerGenderChecker == 'M' || playerGenderChecker == 'm') {
+                    else if (keyboardChoice.Key == ConsoleKey.DownArrow) {
+                        playerGenderChecker = 2;
                         Console.Clear();
-                        Jogador.Gender = 'M';
-                        Console.Write("Muito prazer ");
-                        Console.ForegroundColor = ConsoleColor.Blue;
-                        break;
+                        Console.WriteLine("Qual seu gênero:");
+                        Tela.Choices(playerGenderChecker, ["M", "F"]);
+                        Tela.Divider();
                     }
-                    else {
-                        Console.Clear();
-                        Console.WriteLine("Não identificado, por favor digite uma opção válida.\n");
+                    else if (keyboardChoice.Key == ConsoleKey.Enter) {
+                        Jogador.Gender = playerGenderChecker == 1 ? 'M' : 'F';
+                        if (playerGenderChecker == 1) {
+                            Console.ForegroundColor = ConsoleColor.Blue;
+                        }
+                        else {
+                            Console.ForegroundColor = ConsoleColor.Magenta;
+                        }
+                        break;
                     }
                 }
+
                 Console.Write(Jogador.Name);
                 Console.ResetColor();
                 Console.Write(" vamos começar nossa aventura, mas antes escolha sua classe:\n");
 
                 int playerClassChecker = 0;
                 while (true) {
+                    //TODO Fazer aqui também a função de apresentar o menu de forma mais agradável
                     Console.Write("1 - Guerreiro\n2 - Tank\n3 - Ladino\nSua classe será: ");
                     playerClassChecker = int.Parse(Console.ReadLine());
 
                     if (playerClassChecker == 1) {
+                        Jogador.PlayerClass = "Guerreiro(a)";
                         Jogador.Hp += 2;
                         Jogador.MaxHp += 2;
                         Jogador.Str = 5;
                         Jogador.Def = 2;
                         Jogador.Spd = 1;
-                        Jogador.PlayerClass = "Guerreiro(a)";
                         break;
                     }
                     else if (playerClassChecker == 2) {
+                        Jogador.PlayerClass = "Tank";
                         Jogador.Hp += 2;
                         Jogador.MaxHp += 2;
                         Jogador.Str = 2;
                         Jogador.Def = 5;
                         Jogador.Spd = 1;
-                        Jogador.PlayerClass = "Tank";
                         break;
                     }
                     else if (playerClassChecker == 3) {
+                        Jogador.PlayerClass = "Ladino(a)";
                         Jogador.Hp ++;
                         Jogador.MaxHp ++;
                         Jogador.Str = 3;
                         Jogador.Def = 1;
                         Jogador.Spd = 5;
-                        Jogador.PlayerClass = "Ladino(a)";
                         break;
                     }
                     else {
