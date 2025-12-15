@@ -203,33 +203,48 @@ class RogueProgramingGame {
                     }
                 }
 
-                Tela.Cabecalho();
-                Console.WriteLine("Você está em uma floresta, olha ao seu redor e não vê nada, a não ser um inimigo, um Goblin!");
-
                 //TODO fazer uma função que simule as lutas contra os inimigos
 
                 //Inimigo 1
-                int playerChoiceChecker = 0;
+                Enemy firstEnemy = new Enemy();
+
+                int playerChoiceChecker = 1;
                 while (true) {
-                    Console.WriteLine("O que você faz?\n1 - Atacar\n2 - Defender");
-                    playerChoiceChecker = int.Parse(Console.ReadLine());
-                    if (playerChoiceChecker == 1) {
-                        Console.Clear();
-                        Console.WriteLine("O goblin foi derrotado, parabéns!");
-                        break;
+                    Tela.Cabecalho();
+                    Console.WriteLine("Você está em uma floresta, olha ao seu redor e não vê nada, a não ser um inimigo.\nO que você faz?");
+                    Tela.Choices(playerChoiceChecker, ["Lutar", "Aguardar", "Correr"]);
+                    keyboardChoice = Console.ReadKey();
+                    if (keyboardChoice.Key == ConsoleKey.UpArrow) {
+                        if (playerChoiceChecker > 1) {
+                            playerChoiceChecker--;
+                        }
                     }
-                    else if(playerChoiceChecker == 2){
-                        Console.Clear();
-                        Console.WriteLine("O Goblin te encara, desconfiado.");
+                    else if (keyboardChoice.Key == ConsoleKey.DownArrow) {
+                        if (playerChoiceChecker < 3) {
+                            playerChoiceChecker++;
+                        }
                     }
-                    else {
-                        Console.Clear();
-                        Console.WriteLine("Escolha uma opção válida.");
+                    else if (keyboardChoice.Key == ConsoleKey.Enter) {
+                        if (playerChoiceChecker == 1) {
+                            Tela.Cabecalho();
+                            Console.WriteLine("O goblin foi derrotado, parabéns!");
+                            break;
+                        }
+                        else if(playerChoiceChecker == 2){
+                            Tela.Cabecalho();
+                            Console.WriteLine("O Goblin te encara, desconfiado.");
+                        }
+                        else if (playerChoiceChecker == 3){
+                            Tela.Cabecalho();
+                            Console.WriteLine("Você fugiu da luta");
+                            break;
+                        }
                     }
                 }
 
                 //Inimigo 2
-                Console.WriteLine("Seguindo adiante você encontra com outro inimigo, dessa vez um Troll!");
+                Enemy secondEnemy = new Enemy();
+                Console.WriteLine("Seguindo adiante você encontra com outro inimigo!");
                 playerChoiceChecker = 0;
                 while (true) {
                     Console.WriteLine("O que você faz?\n1 - Atacar\n2 - Defender");
@@ -250,7 +265,8 @@ class RogueProgramingGame {
                 }
 
                 //Inimigo 3
-                Console.WriteLine("Após derrotar o troll você encontra com seu inimigo final, um poderoso golem de pedra!");
+                Enemy thirdEnemy = new Enemy();
+                Console.WriteLine("Após derrotar seu segundo inimigo você encontra com seu adversário final!");
                 playerChoiceChecker = 0;
                 while (true) {
                     Console.WriteLine("O que você faz?\n1 - Atacar\n2 - Defender");
@@ -270,6 +286,7 @@ class RogueProgramingGame {
                     }
                 }
 
+                Tela.Cabecalho();
                 Console.WriteLine("Você chegou até o fim da sua jornada.");
                 break;
             }
