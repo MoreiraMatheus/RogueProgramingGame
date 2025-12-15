@@ -63,7 +63,10 @@ class Enemy {
 
 class Interface {
     public void Cabecalho(){
+        Console.Clear();
+        this.Divider();
         Console.WriteLine("\t\tRogue Programing Game\n");
+        this.Divider();
     }
     public void Divider(int tamanho = 50) {
         for (int i = 0; i < tamanho; i++) {
@@ -88,50 +91,38 @@ class RogueProgramingGame {
 
         while (true) {
             int menu = 1;
-            Tela.Cabecalho();
-            Tela.Choices(menu, ["Novo Jogo", "Carregar", "Sair"]);
-            Tela.Divider();
             while (true) {
+                Tela.Cabecalho();
+                Tela.Choices(menu, ["Novo Jogo", "Carregar", "Sair"]);
                 keyboardChoice = Console.ReadKey();
                 if (keyboardChoice.Key == ConsoleKey.UpArrow) {
                     if (menu > 1) {
                         menu--;
                     }
-                    Console.Clear();
-                    Tela.Cabecalho();
-                    Tela.Choices(menu, ["Novo Jogo", "Carregar", "Sair"]);
-                    Tela.Divider();
                 }
                 else if (keyboardChoice.Key == ConsoleKey.DownArrow) {
                     if (menu < 3) {
                         menu++;
                     }
-                    Console.Clear();
-                    Tela.Cabecalho();
-                    Tela.Choices(menu, ["Novo Jogo", "Carregar", "Sair"]);
-                    Tela.Divider();
                 }
                 else if (keyboardChoice.Key == ConsoleKey.Enter) {
-                    Console.Clear();
                     break;
                 }
             }
-
             if (menu == 1) {
-                Console.Clear();
-
                 string PlayerNameChecker;
                 while (true) {
+                    Tela.Cabecalho();
                     Console.Write("Digite seu nome: ");
                     PlayerNameChecker = Console.ReadLine();
                     PlayerNameChecker = PlayerNameChecker.Trim();
                     PlayerNameChecker = PlayerNameChecker.ToLower();
                     if (PlayerNameChecker == "") {
-                        Console.Clear();
+                        Tela.Cabecalho();
                         Console.WriteLine("O nome do jogador é obrigatório.");
                     }
                     else if (PlayerNameChecker.Length > 20) {
-                        Console.Clear();
+                        Tela.Cabecalho();
                         Console.WriteLine("Por favor, digite um nome menor (limite de 20 caracteres).");
                     }
                     else {
@@ -140,85 +131,79 @@ class RogueProgramingGame {
                         break;
                     }
                 }
-
-                Console.Clear();
                 int playerGenderChecker = 1;
-                Console.WriteLine("Qual seu gênero: ");
-                Tela.Choices(playerGenderChecker, ["M", "F"]);
                 while (true) {
+                    Tela.Cabecalho();
+                    Console.WriteLine("Qual seu gênero: ");
+                    Tela.Choices(playerGenderChecker, ["M", "F"]);
                     keyboardChoice = Console.ReadKey();
 
                     if (keyboardChoice.Key == ConsoleKey.UpArrow) {
                         playerGenderChecker = 1;
-                        Console.Clear();
-                        Console.WriteLine("Qual seu gênero:");
-                        Tela.Choices(playerGenderChecker, ["M", "F"]);
-                        Tela.Divider();
                     }
                     else if (keyboardChoice.Key == ConsoleKey.DownArrow) {
                         playerGenderChecker = 2;
-                        Console.Clear();
-                        Console.WriteLine("Qual seu gênero:");
-                        Tela.Choices(playerGenderChecker, ["M", "F"]);
-                        Tela.Divider();
                     }
                     else if (keyboardChoice.Key == ConsoleKey.Enter) {
                         Jogador.Gender = playerGenderChecker == 1 ? 'M' : 'F';
-                        if (playerGenderChecker == 1) {
-                            Console.ForegroundColor = ConsoleColor.Blue;
-                        }
-                        else {
-                            Console.ForegroundColor = ConsoleColor.Magenta;
-                        }
                         break;
                     }
                 }
-
-                Console.Write(Jogador.Name);
-                Console.ResetColor();
-                Console.Write(" vamos começar nossa aventura, mas antes escolha sua classe:\n");
-
-                int playerClassChecker = 0;
+                int playerClassChecker = 1;
                 while (true) {
-                    //TODO Fazer aqui também a função de apresentar o menu de forma mais agradável
-                    Console.Write("1 - Guerreiro\n2 - Tank\n3 - Ladino\nSua classe será: ");
-                    playerClassChecker = int.Parse(Console.ReadLine());
-
-                    if (playerClassChecker == 1) {
-                        Jogador.PlayerClass = "Guerreiro(a)";
-                        Jogador.Hp += 2;
-                        Jogador.MaxHp += 2;
-                        Jogador.Str = 5;
-                        Jogador.Def = 2;
-                        Jogador.Spd = 1;
-                        break;
+                    Tela.Cabecalho();
+                    Console.Write($"Certo {Jogador.Name} vamos começar nossa aventura, mas antes escolha sua classe:\n");
+                    Tela.Choices(playerClassChecker, ["Guerreiro", "Tank", "Ladino"]);
+                    keyboardChoice = Console.ReadKey();
+                    if (keyboardChoice.Key == ConsoleKey.UpArrow) {
+                        if (playerClassChecker > 1) {
+                            playerClassChecker--;
+                        }
                     }
-                    else if (playerClassChecker == 2) {
-                        Jogador.PlayerClass = "Tank";
-                        Jogador.Hp += 2;
-                        Jogador.MaxHp += 2;
-                        Jogador.Str = 2;
-                        Jogador.Def = 5;
-                        Jogador.Spd = 1;
-                        break;
+                    else if (keyboardChoice.Key == ConsoleKey.DownArrow) {
+                        if (playerClassChecker < 3) {
+                            playerClassChecker++;
+                        }
                     }
-                    else if (playerClassChecker == 3) {
-                        Jogador.PlayerClass = "Ladino(a)";
-                        Jogador.Hp ++;
-                        Jogador.MaxHp ++;
-                        Jogador.Str = 3;
-                        Jogador.Def = 1;
-                        Jogador.Spd = 5;
+                    else if (keyboardChoice.Key == ConsoleKey.Enter) {
+                        if (playerClassChecker == 1) {
+                            Jogador.PlayerClass = "Guerreiro(a)";
+                            Jogador.Hp += 2;
+                            Jogador.MaxHp += 2;
+                            Jogador.Str = 5;
+                            Jogador.Def = 2;
+                            Jogador.Spd = 1;
+                        }
+                        else if (playerClassChecker == 2) {
+                            Jogador.PlayerClass = "Tank";
+                            Jogador.Hp += 2;
+                            Jogador.MaxHp += 2;
+                            Jogador.Str = 2;
+                            Jogador.Def = 5;
+                            Jogador.Spd = 1;
+                        }
+                        else if (playerClassChecker == 3) {
+                            Jogador.PlayerClass = "Ladino(a)";
+                            Jogador.Hp ++;
+                            Jogador.MaxHp ++;
+                            Jogador.Str = 3;
+                            Jogador.Def = 1;
+                            Jogador.Spd = 5;
+                        }
                         break;
-                    }
-                    else {
-                        Console.Clear();
-                        Console.WriteLine("Escolha uma classe válida.\n");
                     }
                 }
-                Console.Clear();
-                Jogador.ShowPlayerStats();
-                Console.WriteLine($"Você jogará como {Jogador.PlayerClass}, excelente escolha! Agora sim podemos dar inicio a sua jornada.\n");
+                while (true) {
+                    Tela.Cabecalho();
+                    Jogador.ShowPlayerStats();
+                    Console.WriteLine($"Você jogará como {Jogador.PlayerClass}, excelente escolha! Agora sim podemos dar inicio a sua jornada.\nTecle ENTER para iniciar.");
+                    keyboardChoice = Console.ReadKey();
+                    if(keyboardChoice.Key == ConsoleKey.Enter) {
+                        break;
+                    }
+                }
+
+                Tela.Cabecalho();
                 Console.WriteLine("Você está em uma floresta, olha ao seu redor e não vê nada, a não ser um inimigo, um Goblin!");
 
                 //TODO fazer uma função que simule as lutas contra os inimigos
