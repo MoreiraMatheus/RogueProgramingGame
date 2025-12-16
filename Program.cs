@@ -57,8 +57,43 @@ class Enemy {
     public string Name;
     public int Hp;
     public int MaxHp;
-    //TODO criar inimigos aqui
 
+    public void ShowEnemyStats() {
+        Console.Write($" - {this.Name} ");
+        for (int i = 0; i < 45 - this.Name.Length ; i++) {
+            Console.Write("-");
+        }
+        Console.WriteLine("\n|                                                |");
+        Console.Write("| HP: ");
+        Console.ForegroundColor = ConsoleColor.Green;
+        for (int i = 0; i < this.Hp; i++) {
+            Console.Write("/");
+        }
+        Console.ResetColor();
+        if (this.Hp != this.MaxHp) {
+            for (int i = 0; i < this.MaxHp - this.Hp; i++) {
+                Console.Write("/");
+            }
+        }
+        for (int i = 0; i < 43 - this.MaxHp; i++) {
+            Console.Write(" ");
+        }
+        Console.Write("|\n|                                                |\n ");
+        for (int i = 0; i < 48; i++) {
+            Console.Write("-");
+        }
+        Console.Write("\n");
+        Console.WriteLine("                      ==VS==");
+    }
+
+    public void EnemyDamaged(int damage) {
+        if (this.Hp <= damage) {
+            this.Hp = 0;
+        }
+        else {
+            this.Hp -= damage;
+        }
+    }
 }
 
 class Interface {
@@ -202,16 +237,19 @@ class RogueProgramingGame {
                         break;
                     }
                 }
-
-                //TODO fazer uma função que simule as lutas contra os inimigos
+                //TODO Polir as mensagens de retorno
 
                 //Inimigo 1
                 Enemy firstEnemy = new Enemy();
-
+                firstEnemy.Name = "Goblin";
+                firstEnemy.MaxHp = 10;
+                firstEnemy.Hp = 10;
                 int playerChoiceChecker = 1;
                 while (true) {
                     Tela.Cabecalho();
                     Console.WriteLine("Você está em uma floresta, olha ao seu redor e não vê nada, a não ser um inimigo.\nO que você faz?");
+                    firstEnemy.ShowEnemyStats();
+                    Jogador.ShowPlayerStats();
                     Tela.Choices(playerChoiceChecker, ["Lutar", "Aguardar", "Correr"]);
                     keyboardChoice = Console.ReadKey();
                     if (keyboardChoice.Key == ConsoleKey.UpArrow) {
@@ -227,8 +265,11 @@ class RogueProgramingGame {
                     else if (keyboardChoice.Key == ConsoleKey.Enter) {
                         if (playerChoiceChecker == 1) {
                             Tela.Cabecalho();
-                            Console.WriteLine("O goblin foi derrotado, parabéns!");
-                            break;
+                            firstEnemy.EnemyDamaged(Jogador.Str);
+                            if (firstEnemy.Hp == 0) {
+                                Console.WriteLine("Você venceu, o seu inimigo foi derrotado!");
+                                break;
+                            }
                         }
                         else if(playerChoiceChecker == 2){
                             Tela.Cabecalho();
@@ -244,48 +285,91 @@ class RogueProgramingGame {
 
                 //Inimigo 2
                 Enemy secondEnemy = new Enemy();
-                Console.WriteLine("Seguindo adiante você encontra com outro inimigo!");
-                playerChoiceChecker = 0;
+                secondEnemy.Name = "Troll";
+                secondEnemy.MaxHp = 10;
+                secondEnemy.Hp = 10;
+                playerChoiceChecker = 1;
                 while (true) {
-                    Console.WriteLine("O que você faz?\n1 - Atacar\n2 - Defender");
-                    playerChoiceChecker = int.Parse(Console.ReadLine());
-                    if (playerChoiceChecker == 1) {
-                        Console.Clear();
-                        Console.WriteLine("O Troll foi derrotado, parabéns!");
-                        break;
+                    Tela.Cabecalho();
+                    Console.WriteLine("Seguindo adiante você encontra com outro inimigo!");
+                    secondEnemy.ShowEnemyStats();
+                    Jogador.ShowPlayerStats();
+                    Tela.Choices(playerChoiceChecker, ["Lutar", "Aguardar", "Correr"]);
+                    keyboardChoice = Console.ReadKey();
+                    if (keyboardChoice.Key == ConsoleKey.UpArrow) {
+                        if (playerChoiceChecker > 1) {
+                            playerChoiceChecker--;
+                        }
                     }
-                    else if (playerChoiceChecker == 2) {
-                        Console.Clear();
-                        Console.WriteLine("O Troll te encara, desconfiado.");
+                    else if (keyboardChoice.Key == ConsoleKey.DownArrow) {
+                        if (playerChoiceChecker < 3) {
+                            playerChoiceChecker++;
+                        }
                     }
-                    else {
-                        Console.Clear();
-                        Console.WriteLine("Escolha uma opção válida.");
+                    else if (keyboardChoice.Key == ConsoleKey.Enter){
+                        if (playerChoiceChecker == 1) {
+                            Tela.Cabecalho();
+                            secondEnemy.EnemyDamaged(Jogador.Str);
+                            if (secondEnemy.Hp == 0) {
+                                Console.WriteLine("Você venceu, o seu inimigo foi derrotado!");
+                                break;
+                            }
+                        }
+                        else if (playerChoiceChecker == 2) {
+                            Tela.Cabecalho();
+                            Console.WriteLine("O Troll te encara, desconfiado.");
+                        }
+                        else if (playerChoiceChecker == 3) {
+                            Tela.Cabecalho();
+                            Console.WriteLine("Você fugiu da luta");
+                            break;
+                        }
                     }
                 }
 
                 //Inimigo 3
                 Enemy thirdEnemy = new Enemy();
-                Console.WriteLine("Após derrotar seu segundo inimigo você encontra com seu adversário final!");
-                playerChoiceChecker = 0;
+                thirdEnemy.Name = "Golem";
+                thirdEnemy.MaxHp = 10;
+                thirdEnemy.Hp = 10;
+                playerChoiceChecker = 1;
                 while (true) {
-                    Console.WriteLine("O que você faz?\n1 - Atacar\n2 - Defender");
-                    playerChoiceChecker = int.Parse(Console.ReadLine());
-                    if (playerChoiceChecker == 1) {
-                        Console.Clear();
-                        Console.WriteLine("O golem foi derrotado, parabéns!");
-                        break;
+                    Tela.Cabecalho();
+                    Console.WriteLine("Após derrotar seu segundo inimigo você encontra com seu adversário final!");
+                    thirdEnemy.ShowEnemyStats();
+                    Jogador.ShowPlayerStats();
+                    Tela.Choices(playerChoiceChecker, ["Lutar", "Aguardar", "Correr"]);
+                    keyboardChoice = Console.ReadKey();
+                    if (keyboardChoice.Key == ConsoleKey.UpArrow) {
+                        if (playerChoiceChecker > 1) {
+                            playerChoiceChecker--;
+                        }
                     }
-                    else if (playerChoiceChecker == 2) {
-                        Console.Clear();
-                        Console.WriteLine("O golem te encara, desconfiado.");
+                    else if (keyboardChoice.Key == ConsoleKey.DownArrow) {
+                        if (playerChoiceChecker < 3) {
+                            playerChoiceChecker++;
+                        }
                     }
-                    else {
-                        Console.Clear();
-                        Console.WriteLine("Escolha uma opção válida.");
+                    else if (keyboardChoice.Key == ConsoleKey.Enter) {
+                        if (playerChoiceChecker == 1) {
+                            Tela.Cabecalho();
+                            thirdEnemy.EnemyDamaged(Jogador.Str);
+                            if (thirdEnemy.Hp == 0) {
+                                Console.WriteLine("Você venceu, o seu inimigo foi derrotado!");
+                                break;
+                            }
+                        }
+                        else if (playerChoiceChecker == 2) {
+                            Tela.Cabecalho();
+                            Console.WriteLine("O golem te encara, desconfiado.");
+                        }
+                        else if (playerChoiceChecker == 3){
+                            Tela.Cabecalho();
+                            Console.WriteLine("Você fugiu");
+                            break;
+                        }
                     }
                 }
-
                 Tela.Cabecalho();
                 Console.WriteLine("Você chegou até o fim da sua jornada.");
                 break;
