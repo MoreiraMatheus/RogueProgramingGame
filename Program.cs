@@ -109,12 +109,31 @@ class Interface {
         }
         Console.Write("\n");
     }
+    //TODO fazer aqui a função de interagir com as opções nativamente
     public void Choices(int numberChoiced, string[] choices) {
         string mensagemApresentada = "";
         for (int i= 0; i < choices.Length; i++) {
             mensagemApresentada += $"    {i + 1} - {choices[i]}\n";
         }
-        Console.WriteLine(mensagemApresentada.Replace($"    {numberChoiced}", $"--> {numberChoiced}"));
+        while (true) {
+            Console.Clear();
+            this.Cabecalho();
+            Console.WriteLine(mensagemApresentada.Replace($"    {numberChoiced}", $"--> {numberChoiced}"));
+            ConsoleKeyInfo keyboardChoice = Console.ReadKey();
+            if (keyboardChoice.Key == ConsoleKey.UpArrow) {
+                if (numberChoiced > 1) {
+                    numberChoiced--;
+                }
+            }
+            else if (keyboardChoice.Key == ConsoleKey.DownArrow) {
+                if (numberChoiced < choices.Length) {
+                    numberChoiced++;
+                }
+            }
+            else if (keyboardChoice.Key == ConsoleKey.Enter) {
+                break;
+            }
+        }
     }
 }
 
@@ -122,85 +141,47 @@ class RogueProgramingGame {
     static void Main() {
         Player Jogador = new Player();
         Interface Tela = new Interface();
-        ConsoleKeyInfo keyboardChoice;
 
         while (true) {
             int menu = 1;
             while (true) {
                 Tela.Cabecalho();
                 Tela.Choices(menu, ["Novo Jogo", "Carregar", "Sair"]);
-                keyboardChoice = Console.ReadKey();
-                if (keyboardChoice.Key == ConsoleKey.UpArrow) {
-                    if (menu > 1) {
-                        menu--;
-                    }
-                }
-                else if (keyboardChoice.Key == ConsoleKey.DownArrow) {
-                    if (menu < 3) {
-                        menu++;
-                    }
-                }
-                else if (keyboardChoice.Key == ConsoleKey.Enter) {
-                    break;
-                }
-            }
-            if (menu == 1) {
-                string PlayerNameChecker;
-                while (true) {
-                    Tela.Cabecalho();
-                    Console.Write("Digite seu nome: ");
-                    PlayerNameChecker = Console.ReadLine();
-                    PlayerNameChecker = PlayerNameChecker.Trim();
-                    PlayerNameChecker = PlayerNameChecker.ToLower();
-                    if (PlayerNameChecker == "") {
+
+                if (menu == 1) {
+                    string PlayerNameChecker;
+                    while (true) {
                         Tela.Cabecalho();
-                        Console.WriteLine("O nome do jogador é obrigatório.");
+                        Console.Write("Digite seu nome: ");
+                        PlayerNameChecker = Console.ReadLine();
+                        PlayerNameChecker = PlayerNameChecker.Trim();
+                        PlayerNameChecker = PlayerNameChecker.ToLower();
+                        if (PlayerNameChecker == "") {
+                            Tela.Cabecalho();
+                            Console.WriteLine("O nome do jogador é obrigatório.");
+                        }
+                        else if (PlayerNameChecker.Length > 20) {
+                            Tela.Cabecalho();
+                            Console.WriteLine("Por favor, digite um nome menor (limite de 20 caracteres).");
+                        }
+                        else {
+                            PlayerNameChecker = PlayerNameChecker.ToUpper().Substring(0, 1) + PlayerNameChecker.Substring(1, PlayerNameChecker.Length - 1);
+                            Jogador.Name = PlayerNameChecker;
+                            break;
+                        }
                     }
-                    else if (PlayerNameChecker.Length > 20) {
-                        Tela.Cabecalho();
-                        Console.WriteLine("Por favor, digite um nome menor (limite de 20 caracteres).");
-                    }
-                    else {
-                        PlayerNameChecker = PlayerNameChecker.ToUpper().Substring(0,1) + PlayerNameChecker.Substring(1, PlayerNameChecker.Length - 1);
-                        Jogador.Name = PlayerNameChecker;
-                        break;
-                    }
-                }
-                int playerGenderChecker = 1;
-                while (true) {
+
+                    int playerGenderChecker = 1;
                     Tela.Cabecalho();
                     Console.WriteLine("Qual seu gênero: ");
                     Tela.Choices(playerGenderChecker, ["M", "F"]);
-                    keyboardChoice = Console.ReadKey();
+                    Jogador.Gender = playerGenderChecker == 1 ? 'M' : 'F';
 
-                    if (keyboardChoice.Key == ConsoleKey.UpArrow) {
-                        playerGenderChecker = 1;
-                    }
-                    else if (keyboardChoice.Key == ConsoleKey.DownArrow) {
-                        playerGenderChecker = 2;
-                    }
-                    else if (keyboardChoice.Key == ConsoleKey.Enter) {
-                        Jogador.Gender = playerGenderChecker == 1 ? 'M' : 'F';
-                        break;
-                    }
-                }
-                int playerClassChecker = 1;
-                while (true) {
-                    Tela.Cabecalho();
-                    Console.Write($"Certo {Jogador.Name} vamos começar nossa aventura, mas antes escolha sua classe:\n");
-                    Tela.Choices(playerClassChecker, ["Guerreiro", "Tank", "Ladino"]);
-                    keyboardChoice = Console.ReadKey();
-                    if (keyboardChoice.Key == ConsoleKey.UpArrow) {
-                        if (playerClassChecker > 1) {
-                            playerClassChecker--;
-                        }
-                    }
-                    else if (keyboardChoice.Key == ConsoleKey.DownArrow) {
-                        if (playerClassChecker < 3) {
-                            playerClassChecker++;
-                        }
-                    }
-                    else if (keyboardChoice.Key == ConsoleKey.Enter) {
+                    int playerClassChecker = 1;
+                    while (true) {
+                        Tela.Cabecalho();
+                        Console.Write($"Certo {Jogador.Name} vamos começar nossa aventura, mas antes escolha sua classe:\n");
+                        Tela.Choices(playerClassChecker, ["Guerreiro", "Tank", "Ladino"]);
                         if (playerClassChecker == 1) {
                             Jogador.PlayerClass = "Guerreiro(a)";
                             Jogador.Hp += 2;
@@ -219,50 +200,37 @@ class RogueProgramingGame {
                         }
                         else if (playerClassChecker == 3) {
                             Jogador.PlayerClass = "Ladino(a)";
-                            Jogador.Hp ++;
-                            Jogador.MaxHp ++;
+                            Jogador.Hp++;
+                            Jogador.MaxHp++;
                             Jogador.Str = 3;
                             Jogador.Def = 1;
                             Jogador.Spd = 5;
                         }
                         break;
                     }
-                }
-                while (true) {
-                    Tela.Cabecalho();
-                    Jogador.ShowPlayerStats();
-                    Console.WriteLine($"Você jogará como {Jogador.PlayerClass}, excelente escolha! Agora sim podemos dar inicio a sua jornada.\nTecle ENTER para iniciar.");
-                    keyboardChoice = Console.ReadKey();
-                    if(keyboardChoice.Key == ConsoleKey.Enter) {
-                        break;
+                    while (true) {
+                        Tela.Cabecalho();
+                        Jogador.ShowPlayerStats();
+                        Console.WriteLine($"Você jogará como {Jogador.PlayerClass}, excelente escolha! Agora sim podemos dar inicio a sua jornada.\nTecle ENTER para iniciar.");
+                        ConsoleKeyInfo keyboardChoice = Console.ReadKey();
+                        if (keyboardChoice.Key == ConsoleKey.Enter) {
+                            break;
+                        }
                     }
-                }
-                //TODO Polir as mensagens de retorno
+                    //TODO Polir as mensagens de retorno
 
-                //Inimigo 1
-                Enemy firstEnemy = new Enemy();
-                firstEnemy.Name = "Goblin";
-                firstEnemy.MaxHp = 10;
-                firstEnemy.Hp = 10;
-                int playerChoiceChecker = 1;
-                while (true) {
-                    Tela.Cabecalho();
-                    Console.WriteLine("Você está em uma floresta, olha ao seu redor e não vê nada, a não ser um inimigo.\nO que você faz?");
-                    firstEnemy.ShowEnemyStats();
-                    Jogador.ShowPlayerStats();
-                    Tela.Choices(playerChoiceChecker, ["Lutar", "Aguardar", "Correr"]);
-                    keyboardChoice = Console.ReadKey();
-                    if (keyboardChoice.Key == ConsoleKey.UpArrow) {
-                        if (playerChoiceChecker > 1) {
-                            playerChoiceChecker--;
-                        }
-                    }
-                    else if (keyboardChoice.Key == ConsoleKey.DownArrow) {
-                        if (playerChoiceChecker < 3) {
-                            playerChoiceChecker++;
-                        }
-                    }
-                    else if (keyboardChoice.Key == ConsoleKey.Enter) {
+                    //Inimigo 1
+                    Enemy firstEnemy = new Enemy();
+                    firstEnemy.Name = "Goblin";
+                    firstEnemy.MaxHp = 10;
+                    firstEnemy.Hp = 10;
+                    int playerChoiceChecker = 1;
+                    while (true) {
+                        Tela.Cabecalho();
+                        Console.WriteLine("Você está em uma floresta, olha ao seu redor e não vê nada, a não ser um inimigo.\nO que você faz?");
+                        firstEnemy.ShowEnemyStats();
+                        Jogador.ShowPlayerStats();
+                        Tela.Choices(playerChoiceChecker, ["Lutar", "Aguardar", "Correr"]);
                         if (playerChoiceChecker == 1) {
                             Tela.Cabecalho();
                             firstEnemy.EnemyDamaged(Jogador.Str);
@@ -271,42 +239,29 @@ class RogueProgramingGame {
                                 break;
                             }
                         }
-                        else if(playerChoiceChecker == 2){
+                        else if (playerChoiceChecker == 2) {
                             Tela.Cabecalho();
                             Console.WriteLine("O Goblin te encara, desconfiado.");
                         }
-                        else if (playerChoiceChecker == 3){
+                        else if (playerChoiceChecker == 3) {
                             Tela.Cabecalho();
                             Console.WriteLine("Você fugiu da luta");
                             break;
                         }
                     }
-                }
 
-                //Inimigo 2
-                Enemy secondEnemy = new Enemy();
-                secondEnemy.Name = "Troll";
-                secondEnemy.MaxHp = 10;
-                secondEnemy.Hp = 10;
-                playerChoiceChecker = 1;
-                while (true) {
-                    Tela.Cabecalho();
-                    Console.WriteLine("Seguindo adiante você encontra com outro inimigo!");
-                    secondEnemy.ShowEnemyStats();
-                    Jogador.ShowPlayerStats();
-                    Tela.Choices(playerChoiceChecker, ["Lutar", "Aguardar", "Correr"]);
-                    keyboardChoice = Console.ReadKey();
-                    if (keyboardChoice.Key == ConsoleKey.UpArrow) {
-                        if (playerChoiceChecker > 1) {
-                            playerChoiceChecker--;
-                        }
-                    }
-                    else if (keyboardChoice.Key == ConsoleKey.DownArrow) {
-                        if (playerChoiceChecker < 3) {
-                            playerChoiceChecker++;
-                        }
-                    }
-                    else if (keyboardChoice.Key == ConsoleKey.Enter){
+                    //Inimigo 2
+                    Enemy secondEnemy = new Enemy();
+                    secondEnemy.Name = "Troll";
+                    secondEnemy.MaxHp = 10;
+                    secondEnemy.Hp = 10;
+                    playerChoiceChecker = 1;
+                    while (true) {
+                        Tela.Cabecalho();
+                        Console.WriteLine("Seguindo adiante você encontra com outro inimigo!");
+                        secondEnemy.ShowEnemyStats();
+                        Jogador.ShowPlayerStats();
+                        Tela.Choices(playerChoiceChecker, ["Lutar", "Aguardar", "Correr"]);
                         if (playerChoiceChecker == 1) {
                             Tela.Cabecalho();
                             secondEnemy.EnemyDamaged(Jogador.Str);
@@ -325,32 +280,19 @@ class RogueProgramingGame {
                             break;
                         }
                     }
-                }
 
-                //Inimigo 3
-                Enemy thirdEnemy = new Enemy();
-                thirdEnemy.Name = "Golem";
-                thirdEnemy.MaxHp = 10;
-                thirdEnemy.Hp = 10;
-                playerChoiceChecker = 1;
-                while (true) {
-                    Tela.Cabecalho();
-                    Console.WriteLine("Após derrotar seu segundo inimigo você encontra com seu adversário final!");
-                    thirdEnemy.ShowEnemyStats();
-                    Jogador.ShowPlayerStats();
-                    Tela.Choices(playerChoiceChecker, ["Lutar", "Aguardar", "Correr"]);
-                    keyboardChoice = Console.ReadKey();
-                    if (keyboardChoice.Key == ConsoleKey.UpArrow) {
-                        if (playerChoiceChecker > 1) {
-                            playerChoiceChecker--;
-                        }
-                    }
-                    else if (keyboardChoice.Key == ConsoleKey.DownArrow) {
-                        if (playerChoiceChecker < 3) {
-                            playerChoiceChecker++;
-                        }
-                    }
-                    else if (keyboardChoice.Key == ConsoleKey.Enter) {
+                    //Inimigo 3
+                    Enemy thirdEnemy = new Enemy();
+                    thirdEnemy.Name = "Golem";
+                    thirdEnemy.MaxHp = 10;
+                    thirdEnemy.Hp = 10;
+                    playerChoiceChecker = 1;
+                    while (true) {
+                        Tela.Cabecalho();
+                        Console.WriteLine("Após derrotar seu segundo inimigo você encontra com seu adversário final!");
+                        thirdEnemy.ShowEnemyStats();
+                        Jogador.ShowPlayerStats();
+                        Tela.Choices(playerChoiceChecker, ["Lutar", "Aguardar", "Correr"]);
                         if (playerChoiceChecker == 1) {
                             Tela.Cabecalho();
                             thirdEnemy.EnemyDamaged(Jogador.Str);
@@ -363,26 +305,25 @@ class RogueProgramingGame {
                             Tela.Cabecalho();
                             Console.WriteLine("O golem te encara, desconfiado.");
                         }
-                        else if (playerChoiceChecker == 3){
+                        else if (playerChoiceChecker == 3) {
                             Tela.Cabecalho();
                             Console.WriteLine("Você fugiu");
                             break;
                         }
                     }
+                    Tela.Cabecalho();
+                    Console.WriteLine("Você chegou até o fim da sua jornada.");
+                    break;
                 }
-                Tela.Cabecalho();
-                Console.WriteLine("Você chegou até o fim da sua jornada.");
-                break;
+                else if (menu == 2) {
+                    Console.WriteLine("Nada por aqui ainda");
+                    break;
+                }
+                else if (menu == 3) {
+                    Console.WriteLine("Saindo...");
+                    break;
+                }
             }
-            else if (menu == 2) {
-                Console.WriteLine("Nada por aqui ainda");
-                break;
-            }
-            else if (menu == 3) {
-                Console.WriteLine("Saindo...");
-                break;
-            }   
-
         }
         Console.WriteLine("\nFim do programa");
     }
