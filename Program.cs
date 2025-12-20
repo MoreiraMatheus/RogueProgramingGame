@@ -107,10 +107,23 @@ class Interface {
     }
     public void Divider(int tamanho = 50) {
         for (int i = 0; i < tamanho; i++) {
-            Console.Write("-");
+            Console.Write("-"); 
         }
         Console.Write("\n");
     }
+
+    public void Await(bool pedirConfirmacao = true) {
+        while (true) {
+            if (pedirConfirmacao) {
+                Console.WriteLine("Tecle ENTER para prosseguir.");
+            }
+            ConsoleKeyInfo keyboardChoice = Console.ReadKey();
+            if (keyboardChoice.Key == ConsoleKey.Enter) {
+                break;
+            }
+        }
+    }
+
     public int Choices(int numberChoiced,string[] choices, string message = "", bool showHeader = true) {
         string mensagemApresentada = "";
         for (int i= 0; i < choices.Length; i++) {
@@ -142,10 +155,13 @@ class Interface {
         return numberChoiced;
     }
 
-    public int BatleChoices(int numberChoiced, Player JogadorAtual, Enemy InimigoAtual) {
+    public int BatleChoices(int numberChoiced, Player JogadorAtual, Enemy InimigoAtual, string battleMessage="") {
         string mensagemApresentada = "    1 - Lutar\n    2 - Aguardar\n    3 - Correr\n";
         while (true) {
             this.Cabecalho();
+            if (battleMessage != "") {
+                Console.WriteLine(battleMessage);
+            }
             InimigoAtual.ShowEnemyStats();
             JogadorAtual.ShowPlayerStats();
             Console.WriteLine(mensagemApresentada.Replace($"    {numberChoiced}", $"--> {numberChoiced}"));
@@ -229,16 +245,10 @@ class RogueProgramingGame {
             Jogador.Spd = 5;
         }
 
-        while (true) {
-            Tela.Cabecalho();
-            Jogador.ShowPlayerStats();
-            Console.WriteLine($"Você jogará como {Jogador.PlayerClass}, excelente escolha! Agora sim podemos dar inicio a sua jornada.\nTecle ENTER para iniciar.");
-            ConsoleKeyInfo keyboardChoice = Console.ReadKey();
-            if (keyboardChoice.Key == ConsoleKey.Enter) {
-                break;
-            }
-        }
-        //TODO Polir as mensagens de retorno
+        Tela.Cabecalho();
+        Jogador.ShowPlayerStats();
+        Console.WriteLine($"Você jogará como {Jogador.PlayerClass}, excelente escolha! Agora sim podemos dar inicio a sua jornada.");
+        Tela.Await();
 
         //Inimigo 1
         Enemy firstEnemy = new Enemy();
@@ -246,25 +256,27 @@ class RogueProgramingGame {
         firstEnemy.MaxHp = 10;
         firstEnemy.Hp = 10;
         int playerChoiceChecker = 1;
+        string firstBattleMessage = "Você está em uma floresta, olha ao seu redor e não vê nada, a não ser um inimigo.\nO que você faz?";
         while (true) {
-            Tela.Cabecalho();
-            Console.WriteLine("Você está em uma floresta, olha ao seu redor e não vê nada, a não ser um inimigo.\nO que você faz?");
-            playerChoiceChecker = Tela.BatleChoices(playerChoiceChecker, Jogador, firstEnemy);
+            playerChoiceChecker = Tela.BatleChoices(playerChoiceChecker, Jogador, firstEnemy, battleMessage:firstBattleMessage);
             if (playerChoiceChecker == 1) {
                 Tela.Cabecalho();
                 firstEnemy.EnemyDamaged(Jogador.Str);
                 if (firstEnemy.Hp == 0) {
                     Console.WriteLine("Você venceu, o seu inimigo foi derrotado!");
+                    Tela.Await();
                     break;
                 }
             }
             else if (playerChoiceChecker == 2) {
                 Tela.Cabecalho();
                 Console.WriteLine("O Goblin te encara, desconfiado.");
+                Tela.Await();
             }
             else if (playerChoiceChecker == 3) {
                 Tela.Cabecalho();
                 Console.WriteLine("Você fugiu da luta");
+                Tela.Await();
                 break;
             }
         }
@@ -275,25 +287,27 @@ class RogueProgramingGame {
         secondEnemy.MaxHp = 10;
         secondEnemy.Hp = 10;
         playerChoiceChecker = 1;
+        string secondBattleMessage = "Seguindo adiante você encontra com outro inimigo!";
         while (true) {
-            Tela.Cabecalho();
-            Console.WriteLine("Seguindo adiante você encontra com outro inimigo!");
-            playerChoiceChecker = Tela.BatleChoices(playerChoiceChecker, Jogador, secondEnemy);
+            playerChoiceChecker = Tela.BatleChoices(playerChoiceChecker, Jogador, secondEnemy, battleMessage:secondBattleMessage);
             if (playerChoiceChecker == 1) {
                 Tela.Cabecalho();
                 secondEnemy.EnemyDamaged(Jogador.Str);
                 if (secondEnemy.Hp == 0) {
                     Console.WriteLine("Você venceu, o seu inimigo foi derrotado!");
+                    Tela.Await();
                     break;
                 }
             }
             else if (playerChoiceChecker == 2) {
                 Tela.Cabecalho();
                 Console.WriteLine("O Troll te encara, desconfiado.");
+                Tela.Await();
             }
             else if (playerChoiceChecker == 3) {
                 Tela.Cabecalho();
                 Console.WriteLine("Você fugiu da luta");
+                Tela.Await();
                 break;
             }
         }
@@ -304,25 +318,27 @@ class RogueProgramingGame {
         thirdEnemy.MaxHp = 10;
         thirdEnemy.Hp = 10;
         playerChoiceChecker = 1;
+            string thirdBattleMessage = "Após derrotar seu segundo inimigo você encontra com seu adversário final!";
         while (true) {
-            Tela.Cabecalho();
-            Console.WriteLine("Após derrotar seu segundo inimigo você encontra com seu adversário final!");
-            playerChoiceChecker = Tela.BatleChoices(playerChoiceChecker, Jogador, thirdEnemy);
+            playerChoiceChecker = Tela.BatleChoices(playerChoiceChecker, Jogador, thirdEnemy, battleMessage:thirdBattleMessage);
             if (playerChoiceChecker == 1) {
                 Tela.Cabecalho();
                 thirdEnemy.EnemyDamaged(Jogador.Str);
                 if (thirdEnemy.Hp == 0) {
                     Console.WriteLine("Você venceu, o seu inimigo foi derrotado!");
+                    Tela.Await();
                     break;
                 }
             }
             else if (playerChoiceChecker == 2) {
                 Tela.Cabecalho();
                 Console.WriteLine("O golem te encara, desconfiado.");
+                Tela.Await();
             }
             else if (playerChoiceChecker == 3) {
                 Tela.Cabecalho();
                 Console.WriteLine("Você fugiu");
+                Tela.Await();
                 break;
             }
         }
