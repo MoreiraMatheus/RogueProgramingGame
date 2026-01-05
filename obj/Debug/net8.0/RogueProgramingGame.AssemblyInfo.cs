@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("RogueProgramingGame")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2d6527a9856400d897722802f7d4f290009ced53")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+09c8c01228064a573b8df903554ac27d7118d6be")]
 [assembly: System.Reflection.AssemblyProductAttribute("RogueProgramingGame")]
 [assembly: System.Reflection.AssemblyTitleAttribute("RogueProgramingGame")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
