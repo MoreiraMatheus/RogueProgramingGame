@@ -2,47 +2,64 @@
 using System.Reflection.Metadata;
 using System.Threading.Channels;
 
-public class Player {
+public class Creature {
     public string Name;
-    public char Gender;
-    public string PlayerClass;
     public int Hp = 10;
     public int MaxHp = 10;
     public int Str = 0;
     public int Def = 0;
     public int Spd = 0;
+
+    //TODO Criar função que mostra os status
+    public void ShowStats() {
+
+    }
+
+    public void Damaged(int damage) {
+        if (Hp <= damage) {
+            Hp = 0;
+        }
+        else {
+            Hp -= damage;
+        }
+    }
+}
+
+public class Player : Creature{
+    public char Gender;
+    public string PlayerClass;
     public int Xp = 0;
     public void ShowPlayerStats() {
         Console.Write(" - ");
-        if (this.Gender == 'F') {
+        if (Gender == 'F') {
             Console.ForegroundColor = ConsoleColor.Magenta;
         }
         else{
             Console.ForegroundColor = ConsoleColor.Blue;
         }
-        Console.Write(this.Name);
+        Console.Write(Name);
         Console.ResetColor();
-        Console.Write($" - {this.PlayerClass} ");
-        for (int i = 0; i< 42 - this.Name.Length - this.PlayerClass.Length; i++) {
+        Console.Write($" - {PlayerClass} ");
+        for (int i = 0; i< 42 - Name.Length - PlayerClass.Length; i++) {
             Console.Write("-");
         }
         Console.WriteLine("\n|                                                |");
         Console.Write("| HP: ");
         Console.ForegroundColor = ConsoleColor.Green;
-        for (int i = 0; i<this.Hp; i++) {
+        for (int i = 0; i<Hp; i++) {
             Console.Write("/");
         }
         Console.ResetColor();
-        if (this.Hp != this.MaxHp) {
-            for (int i = 0; i<this.MaxHp - this.Hp; i++) {
+        if (Hp != MaxHp) {
+            for (int i = 0; i<MaxHp - Hp; i++) {
                 Console.Write("/");
             }
         }
-        for (int i = 0; i < 43 - this.MaxHp; i++) {
+        for (int i = 0; i < 43 - MaxHp; i++) {
             Console.Write(" ");
         }
-        Console.Write($"|\n| STR: {this.Str} DEF: {this.Def} SPD: {this.Spd}");
-        for (int i = 0; i < 30 - this.Str.ToString().Length - this.Def.ToString().Length - this.Spd.ToString().Length; i++) {
+        Console.Write($"|\n| STR: {Str} DEF: {Def} SPD: {Spd}");
+        for (int i = 0; i < 30 - Str.ToString().Length - Def.ToString().Length - Spd.ToString().Length; i++) {
             Console.Write(" ");
         }
         Console.Write("|\n|                                                |\n ");
@@ -53,29 +70,25 @@ public class Player {
     } 
 }
 
-public class Enemy {
-    public string Name;
-    public int Hp;
-    public int MaxHp;
-
+public class Enemy:Creature {
     public void ShowEnemyStats(bool ShowVersus = true) {
-        Console.Write($" - {this.Name} ");
-        for (int i = 0; i < 45 - this.Name.Length ; i++) {
+        Console.Write($" - {Name} ");
+        for (int i = 0; i < 45 - Name.Length ; i++) {
             Console.Write("-");
         }
         Console.WriteLine("\n|                                                |");
         Console.Write("| HP: ");
         Console.ForegroundColor = ConsoleColor.Green;
-        for (int i = 0; i < this.Hp; i++) {
+        for (int i = 0; i < Hp; i++) {
             Console.Write("/");
         }
         Console.ResetColor();
-        if (this.Hp != this.MaxHp) {
-            for (int i = 0; i < this.MaxHp - this.Hp; i++) {
+        if (Hp != MaxHp) {
+            for (int i = 0; i < MaxHp - Hp; i++) {
                 Console.Write("/");
             }
         }
-        for (int i = 0; i < 43 - this.MaxHp; i++) {
+        for (int i = 0; i < 43 - MaxHp; i++) {
             Console.Write(" ");
         }
         Console.Write("|\n|                                                |\n ");
@@ -83,17 +96,9 @@ public class Enemy {
             Console.Write("-");
         }
         Console.Write("\n");
+
         if (ShowVersus) {
             Console.WriteLine("                      ==VS==");
-        }
-    }
-
-    public void EnemyDamaged(int damage) {
-        if (this.Hp <= damage) {
-            this.Hp = 0;
-        }
-        else {
-            this.Hp -= damage;
         }
     }
 }
@@ -185,171 +190,171 @@ static class Interface {
 
 public class RogueProgramingGame {
     static void Main() {
-    Player Jogador = new Player();
-    int menu = 1;
-    menu = Interface.Choices(menu, ["Novo Jogo", "Carregar", "Sair"]);
+        Player Jogador = new Player();
+        int menu = 1;
+        menu = Interface.Choices(menu, ["Novo Jogo", "Carregar", "Sair"]);
 
-    if (menu == 1) {
-        string PlayerNameChecker;
-        while (true) {
+        if (menu == 1) {
+            string PlayerNameChecker;
+            while (true) {
+                Interface.Cabecalho();
+                Console.Write("Digite seu nome: ");
+                PlayerNameChecker = Console.ReadLine();
+                PlayerNameChecker = PlayerNameChecker.Trim();
+                PlayerNameChecker = PlayerNameChecker.ToLower();
+                if (PlayerNameChecker == "") {
+                    Interface.Cabecalho();
+                    Console.WriteLine("O nome do jogador é obrigatório.");
+                }
+                else if (PlayerNameChecker.Length > 20) {
+                    Interface.Cabecalho();
+                    Console.WriteLine("Por favor, digite um nome menor (limite de 20 caracteres).");
+                }
+                else {
+                    PlayerNameChecker = PlayerNameChecker.ToUpper().Substring(0, 1) + PlayerNameChecker.Substring(1, PlayerNameChecker.Length - 1);
+                    Jogador.Name = PlayerNameChecker;
+                    break;
+                }
+            }
+
+            int playerGenderChecker = 1;
+            Interface.Choices(1, ["M", "F"], "Qual seu gênero: "); ;
+            Jogador.Gender = playerGenderChecker == 1 ? 'M' : 'F';
+
+            int playerClassChecker = 1;
+            playerClassChecker = Interface.Choices(playerClassChecker, ["Guerreiro", "Tank", "Ladino"], $"Certo {Jogador.Name} vamos começar nossa aventura, mas antes escolha sua classe:");
+            if (playerClassChecker == 1) {
+                Jogador.PlayerClass = "Guerreiro(a)";
+                Jogador.Hp += 2;
+                Jogador.MaxHp += 2;
+                Jogador.Str = 5;
+                Jogador.Def = 2;
+                Jogador.Spd = 1;
+            }
+            else if (playerClassChecker == 2) {
+                Jogador.PlayerClass = "Tank";
+                Jogador.Hp += 2;
+                Jogador.MaxHp += 2;
+                Jogador.Str = 2;
+                Jogador.Def = 5;
+                Jogador.Spd = 1;
+            }
+            else if (playerClassChecker == 3) {
+                Jogador.PlayerClass = "Ladino(a)";
+                Jogador.Hp++;
+                Jogador.MaxHp++;
+                Jogador.Str = 3;
+                Jogador.Def = 1;
+                Jogador.Spd = 5;
+            }
+
             Interface.Cabecalho();
-            Console.Write("Digite seu nome: ");
-            PlayerNameChecker = Console.ReadLine();
-            PlayerNameChecker = PlayerNameChecker.Trim();
-            PlayerNameChecker = PlayerNameChecker.ToLower();
-            if (PlayerNameChecker == "") {
-                Interface.Cabecalho();
-                Console.WriteLine("O nome do jogador é obrigatório.");
-            }
-            else if (PlayerNameChecker.Length > 20) {
-                Interface.Cabecalho();
-                Console.WriteLine("Por favor, digite um nome menor (limite de 20 caracteres).");
-            }
-            else {
-                PlayerNameChecker = PlayerNameChecker.ToUpper().Substring(0, 1) + PlayerNameChecker.Substring(1, PlayerNameChecker.Length - 1);
-                Jogador.Name = PlayerNameChecker;
-                break;
-            }
-        }
+            Jogador.ShowPlayerStats();
+            Console.WriteLine($"Você jogará como {Jogador.PlayerClass}, excelente escolha! Agora sim podemos dar inicio a sua jornada.");
+            Interface.Await();
 
-        int playerGenderChecker = 1;
-        Interface.Choices(1, ["M", "F"], "Qual seu gênero: "); ;
-        Jogador.Gender = playerGenderChecker == 1 ? 'M' : 'F';
-
-        int playerClassChecker = 1;
-        playerClassChecker = Interface.Choices(playerClassChecker, ["Guerreiro", "Tank", "Ladino"], $"Certo {Jogador.Name} vamos começar nossa aventura, mas antes escolha sua classe:");
-        if (playerClassChecker == 1) {
-            Jogador.PlayerClass = "Guerreiro(a)";
-            Jogador.Hp += 2;
-            Jogador.MaxHp += 2;
-            Jogador.Str = 5;
-            Jogador.Def = 2;
-            Jogador.Spd = 1;
-        }
-        else if (playerClassChecker == 2) {
-            Jogador.PlayerClass = "Tank";
-            Jogador.Hp += 2;
-            Jogador.MaxHp += 2;
-            Jogador.Str = 2;
-            Jogador.Def = 5;
-            Jogador.Spd = 1;
-        }
-        else if (playerClassChecker == 3) {
-            Jogador.PlayerClass = "Ladino(a)";
-            Jogador.Hp++;
-            Jogador.MaxHp++;
-            Jogador.Str = 3;
-            Jogador.Def = 1;
-            Jogador.Spd = 5;
-        }
-
-        Interface.Cabecalho();
-        Jogador.ShowPlayerStats();
-        Console.WriteLine($"Você jogará como {Jogador.PlayerClass}, excelente escolha! Agora sim podemos dar inicio a sua jornada.");
-        Interface.Await();
-
-        //Inimigo 1
-        Enemy firstEnemy = new Enemy();
-        firstEnemy.Name = "Goblin";
-        firstEnemy.MaxHp = 10;
-        firstEnemy.Hp = 10;
-        int playerChoiceChecker = 1;
-        string firstBattleMessage = "Você está em uma floresta, olha ao seu redor e não vê nada, a não ser um inimigo.\nO que você faz?";
-        while (true) {
-            playerChoiceChecker = Interface.BatleChoices(playerChoiceChecker, Jogador, firstEnemy, battleMessage:firstBattleMessage);
-            if (playerChoiceChecker == 1) {
-                Interface.Cabecalho();
-                firstEnemy.EnemyDamaged(Jogador.Str);
-                if (firstEnemy.Hp == 0) {
-                    Console.WriteLine("Você venceu, o seu inimigo foi derrotado!");
+            //Inimigo 1
+            Enemy firstEnemy = new Enemy();
+            firstEnemy.Name = "Goblin";
+            firstEnemy.MaxHp = 10;
+            firstEnemy.Hp = 10;
+            int playerChoiceChecker = 1;
+            string firstBattleMessage = "Você está em uma floresta, olha ao seu redor e não vê nada, a não ser um inimigo.\nO que você faz?";
+            while (true) {
+                playerChoiceChecker = Interface.BatleChoices(playerChoiceChecker, Jogador, firstEnemy, battleMessage:firstBattleMessage);
+                if (playerChoiceChecker == 1) {
+                    Interface.Cabecalho();
+                    firstEnemy.Damaged(Jogador.Str);
+                    if (firstEnemy.Hp == 0) {
+                        Console.WriteLine("Você venceu, o seu inimigo foi derrotado!");
+                        Interface.Await();
+                        break;
+                    }
+                }
+                else if (playerChoiceChecker == 2) {
+                    Interface.Cabecalho();
+                    Console.WriteLine("O Goblin te encara, desconfiado.");
+                    Interface.Await();
+                }
+                else if (playerChoiceChecker == 3) {
+                    Interface.Cabecalho();
+                    Console.WriteLine("Você fugiu da luta");
                     Interface.Await();
                     break;
                 }
             }
-            else if (playerChoiceChecker == 2) {
-                Interface.Cabecalho();
-                Console.WriteLine("O Goblin te encara, desconfiado.");
-                Interface.Await();
-            }
-            else if (playerChoiceChecker == 3) {
-                Interface.Cabecalho();
-                Console.WriteLine("Você fugiu da luta");
-                Interface.Await();
-                break;
-            }
-        }
 
-        //Inimigo 2
-        Enemy secondEnemy = new Enemy();
-        secondEnemy.Name = "Troll";
-        secondEnemy.MaxHp = 10;
-        secondEnemy.Hp = 10;
-        playerChoiceChecker = 1;
-        string secondBattleMessage = "Seguindo adiante você encontra com outro inimigo!";
-        while (true) {
-            playerChoiceChecker = Interface.BatleChoices(playerChoiceChecker, Jogador, secondEnemy, battleMessage:secondBattleMessage);
-            if (playerChoiceChecker == 1) {
-                Interface.Cabecalho();
-                secondEnemy.EnemyDamaged(Jogador.Str);
-                if (secondEnemy.Hp == 0) {
-                    Console.WriteLine("Você venceu, o seu inimigo foi derrotado!");
+            //Inimigo 2
+            Enemy secondEnemy = new Enemy();
+            secondEnemy.Name = "Troll";
+            secondEnemy.MaxHp = 10;
+            secondEnemy.Hp = 10;
+            playerChoiceChecker = 1;
+            string secondBattleMessage = "Seguindo adiante você encontra com outro inimigo!";
+            while (true) {
+                playerChoiceChecker = Interface.BatleChoices(playerChoiceChecker, Jogador, secondEnemy, battleMessage:secondBattleMessage);
+                if (playerChoiceChecker == 1) {
+                    Interface.Cabecalho();
+                    secondEnemy.Damaged(Jogador.Str);
+                    if (secondEnemy.Hp == 0) {
+                        Console.WriteLine("Você venceu, o seu inimigo foi derrotado!");
+                        Interface.Await();
+                        break;
+                    }
+                }
+                else if (playerChoiceChecker == 2) {
+                    Interface.Cabecalho();
+                    Console.WriteLine("O Troll te encara, desconfiado.");
+                    Interface.Await();
+                }
+                else if (playerChoiceChecker == 3) {
+                    Interface.Cabecalho();
+                    Console.WriteLine("Você fugiu da luta");
                     Interface.Await();
                     break;
                 }
             }
-            else if (playerChoiceChecker == 2) {
-                Interface.Cabecalho();
-                Console.WriteLine("O Troll te encara, desconfiado.");
-                Interface.Await();
-            }
-            else if (playerChoiceChecker == 3) {
-                Interface.Cabecalho();
-                Console.WriteLine("Você fugiu da luta");
-                Interface.Await();
-                break;
-            }
-        }
 
-        //Inimigo 3
-        Enemy thirdEnemy = new Enemy();
-        thirdEnemy.Name = "Golem";
-        thirdEnemy.MaxHp = 10;
-        thirdEnemy.Hp = 10;
-        playerChoiceChecker = 1;
-            string thirdBattleMessage = "Após derrotar seu segundo inimigo você encontra com seu adversário final!";
-        while (true) {
-            playerChoiceChecker = Interface.BatleChoices(playerChoiceChecker, Jogador, thirdEnemy, battleMessage:thirdBattleMessage);
-            if (playerChoiceChecker == 1) {
-                Interface.Cabecalho();
-                thirdEnemy.EnemyDamaged(Jogador.Str);
-                if (thirdEnemy.Hp == 0) {
-                    Console.WriteLine("Você venceu, o seu inimigo foi derrotado!");
+            //Inimigo 3
+            Enemy thirdEnemy = new Enemy();
+            thirdEnemy.Name = "Golem";
+            thirdEnemy.MaxHp = 10;
+            thirdEnemy.Hp = 10;
+            playerChoiceChecker = 1;
+                string thirdBattleMessage = "Após derrotar seu segundo inimigo você encontra com seu adversário final!";
+            while (true) {
+                playerChoiceChecker = Interface.BatleChoices(playerChoiceChecker, Jogador, thirdEnemy, battleMessage:thirdBattleMessage);
+                if (playerChoiceChecker == 1) {
+                    Interface.Cabecalho();
+                    thirdEnemy.Damaged(Jogador.Str);
+                    if (thirdEnemy.Hp == 0) {
+                        Console.WriteLine("Você venceu, o seu inimigo foi derrotado!");
+                        Interface.Await();
+                        break;
+                    }
+                }
+                else if (playerChoiceChecker == 2) {
+                    Interface.Cabecalho();
+                    Console.WriteLine("O golem te encara, desconfiado.");
+                    Interface.Await();
+                }
+                else if (playerChoiceChecker == 3) {
+                    Interface.Cabecalho();
+                    Console.WriteLine("Você fugiu");
                     Interface.Await();
                     break;
                 }
             }
-            else if (playerChoiceChecker == 2) {
-                Interface.Cabecalho();
-                Console.WriteLine("O golem te encara, desconfiado.");
-                Interface.Await();
-            }
-            else if (playerChoiceChecker == 3) {
-                Interface.Cabecalho();
-                Console.WriteLine("Você fugiu");
-                Interface.Await();
-                break;
-            }
-        }
 
-        Interface.Cabecalho();
-        Console.WriteLine("Você chegou até o fim da sua jornada.");
-    }
-    else if (menu == 2) {
-        Console.WriteLine("Nada por aqui ainda");
-    }
-    else if (menu == 3) {
-        Console.WriteLine("Saindo...");
-    }
-    Console.WriteLine("\nFim do programa");
+            Interface.Cabecalho();
+            Console.WriteLine("Você chegou até o fim da sua jornada.");
+        }
+        else if (menu == 2) {
+            Console.WriteLine("Nada por aqui ainda");
+        }
+        else if (menu == 3) {
+            Console.WriteLine("Saindo...");
+        }
+        Console.WriteLine("\nFim do programa");
     }
 }
