@@ -5,6 +5,14 @@
     {
       "AbsoluteMoniker": "D:0:0:{9FFAC5AD-A806-4BDA-8B37-F9E247F96EE4}|RogueProgramingGame.csproj|c:\\users\\famil\\onedrive\\documentos\\programa\u00E7\u00E3o\\estudos\\c#\\rogueprograminggame\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9FFAC5AD-A806-4BDA-8B37-F9E247F96EE4}|RogueProgramingGame.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FFAC5AD-A806-4BDA-8B37-F9E247F96EE4}|RogueProgramingGame.csproj|c:\\users\\famil\\onedrive\\documentos\\programa\u00E7\u00E3o\\estudos\\c#\\rogueprograminggame\\creatures.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9FFAC5AD-A806-4BDA-8B37-F9E247F96EE4}|RogueProgramingGame.csproj|solutionrelative:creatures.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FFAC5AD-A806-4BDA-8B37-F9E247F96EE4}|RogueProgramingGame.csproj|c:\\users\\famil\\onedrive\\documentos\\programa\u00E7\u00E3o\\estudos\\c#\\rogueprograminggame\\interface.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9FFAC5AD-A806-4BDA-8B37-F9E247F96EE4}|RogueProgramingGame.csproj|solutionrelative:interface.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -28,9 +36,35 @@
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "C:\\Users\\famil\\OneDrive\\Documentos\\Programa\u00E7\u00E3o\\Estudos\\C#\\RogueProgramingGame\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAFAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAC0AAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-12-20T15:57:14.803Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Creatures.cs",
+              "DocumentMoniker": "C:\\Users\\famil\\OneDrive\\Documentos\\Programa\u00E7\u00E3o\\Estudos\\C#\\RogueProgramingGame\\Creatures.cs",
+              "RelativeDocumentMoniker": "Creatures.cs",
+              "ToolTip": "C:\\Users\\famil\\OneDrive\\Documentos\\Programa\u00E7\u00E3o\\Estudos\\C#\\RogueProgramingGame\\Creatures.cs",
+              "RelativeToolTip": "Creatures.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGQAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-07T02:44:50.793Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Interface.cs",
+              "DocumentMoniker": "C:\\Users\\famil\\OneDrive\\Documentos\\Programa\u00E7\u00E3o\\Estudos\\C#\\RogueProgramingGame\\Interface.cs",
+              "RelativeDocumentMoniker": "Interface.cs",
+              "ToolTip": "C:\\Users\\famil\\OneDrive\\Documentos\\Programa\u00E7\u00E3o\\Estudos\\C#\\RogueProgramingGame\\Interface.cs",
+              "RelativeToolTip": "Interface.cs",
+              "ViewState": "AgIAABEAAAAAAAAAAAAwwBIAAABGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-07T02:41:12.861Z",
               "EditorCaption": ""
             }
           ]
