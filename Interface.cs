@@ -25,7 +25,7 @@
             }
         }
 
-        static public int Choices(int numberChoiced, string[] choices, string message = "", bool showHeader = true) {
+        static public int Choices(ref int numberChoiced, string[] choices, string message = "", bool showHeader = true) {
             string mensagemApresentada = "";
             for (int i = 0; i < choices.Length; i++) {
                 mensagemApresentada += $"    {i + 1} - {choices[i]}\n";

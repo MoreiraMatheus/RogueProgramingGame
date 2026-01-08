@@ -1,4 +1,6 @@
-﻿namespace RogueProgramingGame {
+﻿using System.Runtime.CompilerServices;
+
+namespace RogueProgramingGame {
     public class Creature {
         public string Name;
         public int Hp = 10;
@@ -9,7 +11,11 @@
 
         //TODO Criar função que mostra os status
         public void ShowStats() {
-
+            Console.WriteLine(Name);
+            Console.WriteLine($"HP: {Hp}/{MaxHp}");
+            Console.WriteLine($"STR: {Str}");
+            Console.WriteLine($"DEF: {Def}");
+            Console.WriteLine($"SPD: {Spd}");
         }
 
         public void Damaged(int damage) {

@@ -1,10 +1,11 @@
-﻿namespace RogueProgramingGame { 
+﻿
+namespace RogueProgramingGame { 
     public class RogueProgramingGame {
-            static void Main() {
-
+        static void Main() {
             Player Jogador = new Player();
+
             int menu = 1;
-            menu = Interface.Choices(menu, ["Novo Jogo", "Carregar", "Sair"]);
+            Interface.Choices(ref menu, ["Novo Jogo", "Carregar", "Sair"]);
 
             if (menu == 1) {
                 string PlayerNameChecker;
@@ -28,13 +29,14 @@
                         break;
                     }
                 }
+                
 
                 int playerGenderChecker = 1;
-                Interface.Choices(1, ["M", "F"], "Qual seu gênero: "); ;
+                Interface.Choices(ref playerGenderChecker, ["M", "F"], "Qual seu gênero: "); ;
                 Jogador.Gender = playerGenderChecker == 1 ? 'M' : 'F';
 
                 int playerClassChecker = 1;
-                playerClassChecker = Interface.Choices(playerClassChecker, ["Guerreiro", "Tank", "Ladino"], $"Certo {Jogador.Name} vamos começar nossa aventura, mas antes escolha sua classe:");
+                Interface.Choices(ref playerClassChecker, ["Guerreiro", "Tank", "Ladino"], $"Certo {Jogador.Name} vamos começar nossa aventura, mas antes escolha sua classe:");
                 if (playerClassChecker == 1) {
                     Jogador.PlayerClass = "Guerreiro(a)";
                     Jogador.Hp += 2;
@@ -68,8 +70,7 @@
                 //Inimigo 1
                 Enemy firstEnemy = new Enemy();
                 firstEnemy.Name = "Goblin";
-                firstEnemy.MaxHp = 10;
-                firstEnemy.Hp = 10;
+                firstEnemy.Str = 1;
                 int playerChoiceChecker = 1;
                 string firstBattleMessage = "Você está em uma floresta, olha ao seu redor e não vê nada, a não ser um inimigo.\nO que você faz?";
                 while (true) {
@@ -94,13 +95,13 @@
                         Interface.Await();
                         break;
                     }
+                    Jogador.Damaged(firstEnemy.Str);
                 }
 
                 //Inimigo 2
                 Enemy secondEnemy = new Enemy();
                 secondEnemy.Name = "Troll";
-                secondEnemy.MaxHp = 10;
-                secondEnemy.Hp = 10;
+                secondEnemy.Str = 1;
                 playerChoiceChecker = 1;
                 string secondBattleMessage = "Seguindo adiante você encontra com outro inimigo!";
                 while (true) {
@@ -125,13 +126,13 @@
                         Interface.Await();
                         break;
                     }
+                    Jogador.Damaged(firstEnemy.Str);
                 }
 
                 //Inimigo 3
                 Enemy thirdEnemy = new Enemy();
                 thirdEnemy.Name = "Golem";
-                thirdEnemy.MaxHp = 10;
-                thirdEnemy.Hp = 10;
+                thirdEnemy.Str = 1;
                 playerChoiceChecker = 1;
                     string thirdBattleMessage = "Após derrotar seu segundo inimigo você encontra com seu adversário final!";
                 while (true) {
@@ -156,10 +157,12 @@
                         Interface.Await();
                         break;
                     }
+                    Jogador.Damaged(firstEnemy.Str);
                 }
 
                 Interface.Cabecalho();
                 Console.WriteLine("Você chegou até o fim da sua jornada.");
+                Jogador.ShowPlayerStats();
             }
             else if (menu == 2) {
                 Console.WriteLine("Nada por aqui ainda");
