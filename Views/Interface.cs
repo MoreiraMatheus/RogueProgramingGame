@@ -1,5 +1,13 @@
 ﻿namespace RogueProgramingGame {
+
     static class Interface {
+
+        static public void Divider(int tamanho = 50) {
+            for (int i = 0; i < tamanho; i++) {
+                Console.Write("-");
+            }
+            Console.Write("\n");
+        }
 
         static public void Cabecalho() {
             Console.Clear();
@@ -7,12 +15,7 @@
             Console.WriteLine("\t\tRogue Programing Game\n");
             Divider();
         }
-        static public void Divider(int tamanho = 50) {
-            for (int i = 0; i < tamanho; i++) {
-                Console.Write("-");
-            }
-            Console.Write("\n");
-        }
+
         static public void Await(bool pedirConfirmacao = true) {
             while (true) {
                 if (pedirConfirmacao) {
@@ -54,6 +57,14 @@
                 }
             }
             return numberChoiced;
+        }
+
+        static public int MenuChoices(MenuOptions escolha) {
+            if (escolha == MenuOptions.NovoJogo) {
+
+            }
+
+            return 1;
         }
 
         static public int BatleChoices(int numberChoiced, Player JogadorAtual, Enemy InimigoAtual, string battleMessage = "") {

@@ -9,8 +9,7 @@ namespace RogueProgramingGame {
         public int Def = 0;
         public int Spd = 0;
 
-        //TODO Criar função que mostra os status
-        public void ShowStats() {
+        public void ShowStatsSimple() {
             Console.WriteLine(Name);
             Console.WriteLine($"HP: {Hp}/{MaxHp}");
             Console.WriteLine($"STR: {Str}");
@@ -32,6 +31,16 @@ namespace RogueProgramingGame {
         public char Gender;
         public string PlayerClass;
         public int Xp = 0;
+
+        public void ChoseGender(char newGender) { 
+            Gender = newGender;
+        }
+        public void ChoseGender() {
+            int newGender = 1;
+            Interface.Choices(ref newGender, ["M", "F"], "Qual seu gênero: ");
+            Gender = newGender == 1 ? 'M' : 'F';
+        }
+
         public void ShowPlayerStats() {
             Console.Write(" - ");
             if (Gender == 'F') {

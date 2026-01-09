@@ -1,9 +1,9 @@
 ﻿
-namespace RogueProgramingGame { 
+namespace RogueProgramingGame {
     public class RogueProgramingGame {
+
         static void Main() {
             Player Jogador = new Player();
-
             int menu = 1;
             Interface.Choices(ref menu, ["Novo Jogo", "Carregar", "Sair"]);
 
@@ -30,10 +30,7 @@ namespace RogueProgramingGame {
                     }
                 }
                 
-
-                int playerGenderChecker = 1;
-                Interface.Choices(ref playerGenderChecker, ["M", "F"], "Qual seu gênero: "); ;
-                Jogador.Gender = playerGenderChecker == 1 ? 'M' : 'F';
+                Jogador.ChoseGender();
 
                 int playerClassChecker = 1;
                 Interface.Choices(ref playerClassChecker, ["Guerreiro", "Tank", "Ladino"], $"Certo {Jogador.Name} vamos começar nossa aventura, mas antes escolha sua classe:");
