@@ -12,32 +12,7 @@ namespace RogueProgramingGame {
                 
                 Jogador.ChoseGender();
 
-                int playerClassChecker = 1;
-                Interface.Choices(ref playerClassChecker, ["Guerreiro", "Tank", "Ladino"], $"Certo {Jogador.Name} vamos começar nossa aventura, mas antes escolha sua classe:");
-                if (playerClassChecker == 1) {
-                    Jogador.PlayerClass = "Guerreiro(a)";
-                    Jogador.Hp += 2;
-                    Jogador.MaxHp += 2;
-                    Jogador.Str = 5;
-                    Jogador.Def = 2;
-                    Jogador.Spd = 1;
-                }
-                else if (playerClassChecker == 2) {
-                    Jogador.PlayerClass = "Tank";
-                    Jogador.Hp += 2;
-                    Jogador.MaxHp += 2;
-                    Jogador.Str = 2;
-                    Jogador.Def = 5;
-                    Jogador.Spd = 1;
-                }
-                else if (playerClassChecker == 3) {
-                    Jogador.PlayerClass = "Ladino(a)";
-                    Jogador.Hp++;
-                    Jogador.MaxHp++;
-                    Jogador.Str = 3;
-                    Jogador.Def = 1;
-                    Jogador.Spd = 5;
-                }
+                Jogador.ChoseClass();
 
                 Interface.Cabecalho();
                 Jogador.ShowPlayerStats();

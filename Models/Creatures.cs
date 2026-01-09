@@ -65,6 +65,35 @@ namespace RogueProgramingGame {
             }
         }
 
+        public void ChoseClass() {
+            int playerClassChecker = 1;
+            Interface.Choices(ref playerClassChecker, ["Guerreiro", "Tank", "Ladino"], $"Certo {Name} vamos começar nossa aventura, mas antes escolha sua classe:");
+            if (playerClassChecker == 1) {
+                PlayerClass = "Guerreiro(a)";
+                Hp += 2;
+                MaxHp += 2;
+                Str = 5;
+                Def = 2;
+                Spd = 1;
+            }
+            else if (playerClassChecker == 2) {
+                PlayerClass = "Tank";
+                Hp += 2;
+                MaxHp += 2;
+                Str = 2;
+                Def = 5;
+                Spd = 1;
+            }
+            else if (playerClassChecker == 3) {
+                PlayerClass = "Ladino(a)";
+                Hp++;
+                MaxHp++;
+                Str = 3;
+                Def = 1;
+                Spd = 5;
+            }
+        }
+
         public void ShowPlayerStats() {
             Console.Write(" - ");
             if (Gender == 'F') {
