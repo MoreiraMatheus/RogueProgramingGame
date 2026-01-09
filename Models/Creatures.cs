@@ -166,5 +166,34 @@ namespace RogueProgramingGame {
                 Console.WriteLine("                      ==VS==");
             }
         }
+
+        public void EnemyBattle(Player Player, string battleMessage) {
+            int playerChoiceChecker = 1;
+
+            while (true) {
+                playerChoiceChecker = Interface.BatleChoices(playerChoiceChecker, Player, this, battleMessage: battleMessage);
+                if (playerChoiceChecker == 1) {
+                    Interface.Cabecalho();
+                    Damaged(Player.Str);
+                    if (Hp == 0) {
+                        Console.WriteLine("Você venceu, o seu inimigo foi derrotado!");
+                        Interface.Await();
+                        break;
+                    }
+                }
+                else if (playerChoiceChecker == 2) {
+                    Interface.Cabecalho();
+                    Console.WriteLine("O Goblin te encara, desconfiado.");
+                    Interface.Await();
+                }
+                else if (playerChoiceChecker == 3) {
+                    Interface.Cabecalho();
+                    Console.WriteLine("Você fugiu da luta");
+                    Interface.Await();
+                    break;
+                }
+                Player.Damaged(Str);
+            }
+        }
     }
 }
