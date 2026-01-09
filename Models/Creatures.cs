@@ -41,6 +41,30 @@ namespace RogueProgramingGame {
             Gender = newGender == 1 ? 'M' : 'F';
         }
 
+        public void ChoseName() {
+            string PlayerNameChecker;
+            while (true) {
+                Interface.Cabecalho();
+                Console.Write("Digite seu nome: ");
+                PlayerNameChecker = Console.ReadLine();
+                PlayerNameChecker = PlayerNameChecker.Trim();
+                PlayerNameChecker = PlayerNameChecker.ToLower();
+                if (PlayerNameChecker == "") {
+                    Interface.Cabecalho();
+                    Console.WriteLine("O nome do jogador é obrigatório.");
+                }
+                else if (PlayerNameChecker.Length > 20) {
+                    Interface.Cabecalho();
+                    Console.WriteLine("Por favor, digite um nome menor (limite de 20 caracteres).");
+                }
+                else {
+                    PlayerNameChecker = PlayerNameChecker.ToUpper().Substring(0, 1) + PlayerNameChecker.Substring(1, PlayerNameChecker.Length - 1);
+                    Name = PlayerNameChecker;
+                    break;
+                }
+            }
+        }
+
         public void ShowPlayerStats() {
             Console.Write(" - ");
             if (Gender == 'F') {
