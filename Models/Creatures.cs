@@ -9,8 +9,7 @@ namespace RogueProgramingGame {
         public int Def = 0;
         public int Spd = 0;
 
-        //TODO Criar função que mostra os status
-        public void ShowStats() {
+        public void ShowStatsSimple() {
             Console.WriteLine(Name);
             Console.WriteLine($"HP: {Hp}/{MaxHp}");
             Console.WriteLine($"STR: {Str}");
@@ -32,6 +31,69 @@ namespace RogueProgramingGame {
         public char Gender;
         public string PlayerClass;
         public int Xp = 0;
+
+        public void ChoseGender(char newGender) { 
+            Gender = newGender;
+        }
+        public void ChoseGender() {
+            int newGender = 1;
+            Interface.Choices(ref newGender, ["M", "F"], "Qual seu gênero: ");
+            Gender = newGender == 1 ? 'M' : 'F';
+        }
+
+        public void ChoseName() {
+            string PlayerNameChecker;
+            while (true) {
+                Interface.Cabecalho();
+                Console.Write("Digite seu nome: ");
+                PlayerNameChecker = Console.ReadLine();
+                PlayerNameChecker = PlayerNameChecker.Trim();
+                PlayerNameChecker = PlayerNameChecker.ToLower();
+                if (PlayerNameChecker == "") {
+                    Interface.Cabecalho();
+                    Console.WriteLine("O nome do jogador é obrigatório.");
+                }
+                else if (PlayerNameChecker.Length > 20) {
+                    Interface.Cabecalho();
+                    Console.WriteLine("Por favor, digite um nome menor (limite de 20 caracteres).");
+                }
+                else {
+                    PlayerNameChecker = PlayerNameChecker.ToUpper().Substring(0, 1) + PlayerNameChecker.Substring(1, PlayerNameChecker.Length - 1);
+                    Name = PlayerNameChecker;
+                    break;
+                }
+            }
+        }
+
+        public void ChoseClass() {
+            int playerClassChecker = 1;
+            Interface.Choices(ref playerClassChecker, ["Guerreiro", "Tank", "Ladino"], $"Certo {Name} vamos começar nossa aventura, mas antes escolha sua classe:");
+            if (playerClassChecker == 1) {
+                PlayerClass = "Guerreiro(a)";
+                Hp += 2;
+                MaxHp += 2;
+                Str = 5;
+                Def = 2;
+                Spd = 1;
+            }
+            else if (playerClassChecker == 2) {
+                PlayerClass = "Tank";
+                Hp += 2;
+                MaxHp += 2;
+                Str = 2;
+                Def = 5;
+                Spd = 1;
+            }
+            else if (playerClassChecker == 3) {
+                PlayerClass = "Ladino(a)";
+                Hp++;
+                MaxHp++;
+                Str = 3;
+                Def = 1;
+                Spd = 5;
+            }
+        }
+
         public void ShowPlayerStats() {
             Console.Write(" - ");
             if (Gender == 'F') {
@@ -102,6 +164,35 @@ namespace RogueProgramingGame {
 
             if (ShowVersus) {
                 Console.WriteLine("                      ==VS==");
+            }
+        }
+
+        public void EnemyBattle(Player Player, string battleMessage) {
+            int playerChoiceChecker = 1;
+
+            while (true) {
+                playerChoiceChecker = Interface.BatleChoices(playerChoiceChecker, Player, this, battleMessage: battleMessage);
+                if (playerChoiceChecker == 1) {
+                    Interface.Cabecalho();
+                    Damaged(Player.Str);
+                    if (Hp == 0) {
+                        Console.WriteLine("Você venceu, o seu inimigo foi derrotado!");
+                        Interface.Await();
+                        break;
+                    }
+                }
+                else if (playerChoiceChecker == 2) {
+                    Interface.Cabecalho();
+                    Console.WriteLine("O Goblin te encara, desconfiado.");
+                    Interface.Await();
+                }
+                else if (playerChoiceChecker == 3) {
+                    Interface.Cabecalho();
+                    Console.WriteLine("Você fugiu da luta");
+                    Interface.Await();
+                    break;
+                }
+                Player.Damaged(Str);
             }
         }
     }
