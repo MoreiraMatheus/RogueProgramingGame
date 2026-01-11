@@ -1,11 +1,7 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\Controllers",
-    "\\Models",
-    "\\Models\\Enums",
-    "\\Views"
+    ""
   ],
-  "SelectedNode": "\\Program.cs",
+  "SelectedNode": "\\RogueProgramingGame.sln",
   "PreviewInSolutionExplorer": false
 }

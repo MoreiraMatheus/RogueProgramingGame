@@ -2,6 +2,7 @@ namespace RogueProgramingGame {
     enum BattleOptions {
         Lutar,
         Aguardar,
-        Correr
+        Correr,
+        Inventario
     }
 }
