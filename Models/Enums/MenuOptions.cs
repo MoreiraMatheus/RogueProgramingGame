@@ -1,7 +1,7 @@
 ﻿namespace RogueProgramingGame { 
     enum MenuOptions {
-        NovoJogo,
-        Carregar,
-        Sair
+        Novo_Jogo= 0,
+        Carregar = 1,
+        Sair = 2
     }
 }

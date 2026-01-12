@@ -1,98 +1,174 @@
-﻿namespace RogueProgramingGame {
+﻿namespace RogueProgramingGame;
 
-    static class Interface {
+static class Interface {
 
-        static public void Divider(int tamanho = 50) {
-            for (int i = 0; i < tamanho; i++) {
-                Console.Write("-");
-            }
-            Console.Write("\n");
+    static public void Divider(int tamanho = 50) {
+        for (int i = 0; i < tamanho; i++) {
+            Console.Write("-");
         }
+        Console.Write("\n");
+    }
 
-        static public void Cabecalho() {
-            Console.Clear();
-            Divider();
-            Console.WriteLine("\t\tRogue Programing Game\n");
-            Divider();
-        }
+    static public void Cabecalho() {
+        Console.Clear();
+        Divider();
+        Console.WriteLine("\t\tRogue Programing Game\n");
+        Divider();
+    }
 
-        static public void Await(bool pedirConfirmacao = true) {
-            while (true) {
-                if (pedirConfirmacao) {
-                    Console.WriteLine("Tecle ENTER para prosseguir.");
-                }
-                ConsoleKeyInfo keyboardChoice = Console.ReadKey();
-                if (keyboardChoice.Key == ConsoleKey.Enter) {
-                    break;
-                }
+    static public void Await() {
+        while (true) {
+            ConsoleKeyInfo keyboardChoice = Console.ReadKey();
+            if (keyboardChoice.Key == ConsoleKey.Enter) {
+                break;
             }
         }
-
-        static public int Choices(ref int numberChoiced, string[] choices, string message = "", bool showHeader = true) {
-            string mensagemApresentada = "";
-            for (int i = 0; i < choices.Length; i++) {
-                mensagemApresentada += $"    {i + 1} - {choices[i]}\n";
+    }
+    static public void Await(string mensagem) {
+        Console.WriteLine(mensagem);
+        while (true) {
+            ConsoleKeyInfo keyboardChoice = Console.ReadKey();
+            if (keyboardChoice.Key == ConsoleKey.Enter) {
+                break;
             }
-            while (true) {
-                if (showHeader) {
-                    Cabecalho();
-                }
-                if (message != "") {
-                    Console.WriteLine(message);
-                }
-                Console.WriteLine(mensagemApresentada.Replace($"    {numberChoiced}", $"--> {numberChoiced}"));
-                ConsoleKeyInfo keyboardChoice = Console.ReadKey();
-                if (keyboardChoice.Key == ConsoleKey.UpArrow) {
-                    if (numberChoiced > 1) {
-                        numberChoiced--;
-                    }
-                }
-                else if (keyboardChoice.Key == ConsoleKey.DownArrow) {
-                    if (numberChoiced < choices.Length) {
-                        numberChoiced++;
-                    }
-                }
-                else if (keyboardChoice.Key == ConsoleKey.Enter) {
-                    break;
-                }
-            }
-            return numberChoiced;
         }
-
-        static public int MenuChoices(MenuOptions escolha) {
-            if (escolha == MenuOptions.NovoJogo) {
-
+    }
+    
+    private static void ShowChoices(string[] options, string currentOption) {
+        Cabecalho();
+        foreach (string option in options) {
+            if (option == currentOption) {
+                Console.WriteLine($"--> {option.Replace('_', ' ')}");
             }
-
-            return 1;
+            else {
+                Console.WriteLine($"    {option.Replace('_', ' ')}");
+            }
         }
+    }
+    private static void ShowChoices(string[] options, string currentOption, bool showHeader) {
+        if (showHeader) {
+            Cabecalho();
+        }
+        foreach (string option in options) {
+            if (option == currentOption) {
+                Console.WriteLine($"--> {option.Replace('_', ' ')}");
+            }
+            else {
+                Console.WriteLine($"    {option.Replace('_', ' ')}");
+            }
+        }
+    }
 
-        static public int BatleChoices(int numberChoiced, Player JogadorAtual, Enemy InimigoAtual, string battleMessage = "") {
-            string mensagemApresentada = "    1 - Lutar\n    2 - Aguardar\n    3 - Correr\n";
-            while (true) {
-                Cabecalho();
-                if (battleMessage != "") {
-                    Console.WriteLine(battleMessage);
-                }
-                InimigoAtual.ShowEnemyStats();
-                JogadorAtual.ShowPlayerStats();
-                Console.WriteLine(mensagemApresentada.Replace($"    {numberChoiced}", $"--> {numberChoiced}"));
-                ConsoleKeyInfo keyboardChoice = Console.ReadKey();
-                if (keyboardChoice.Key == ConsoleKey.UpArrow) {
-                    if (numberChoiced > 1) {
-                        numberChoiced--;
-                    }
-                }
-                else if (keyboardChoice.Key == ConsoleKey.DownArrow) {
-                    if (numberChoiced < 3) {
-                        numberChoiced++;
-                    }
-                }
-                else if (keyboardChoice.Key == ConsoleKey.Enter) {
-                    break;
+    //Choices
+
+    static public MenuOptions MenuChoices() {
+        string[] listOptions = Enum.GetNames(typeof(MenuOptions));
+        MenuOptions optionSelected = MenuOptions.Novo_Jogo;
+        int optionToPrint;
+
+        while (true) {
+            optionToPrint = (int)optionSelected;
+            ShowChoices(listOptions, listOptions[optionToPrint]);
+
+            ConsoleKeyInfo keyboardChoice = Console.ReadKey();
+            if (keyboardChoice.Key == ConsoleKey.UpArrow) {
+                if (optionSelected > MenuOptions.Novo_Jogo) {
+                    optionSelected--;
                 }
             }
-            return numberChoiced;
+            else if (keyboardChoice.Key == ConsoleKey.DownArrow) {
+                if (optionSelected < MenuOptions.Sair) {
+                    optionSelected++;
+                }
+            }
+            else if (keyboardChoice.Key == ConsoleKey.Enter) {
+                break;
+            }
         }
+        return optionSelected;
+    }
+    
+    static public GenderOptions GenderChoices() {
+        string[] listOptions = Enum.GetNames(typeof(GenderOptions));
+        GenderOptions optionSelected = GenderOptions.Masculino;
+        int optionToPrint;
+
+        while (true) {
+            optionToPrint = (int)optionSelected;
+            ShowChoices(listOptions, listOptions[optionToPrint]);
+
+            ConsoleKeyInfo keyboardChoice = Console.ReadKey();
+            if (keyboardChoice.Key == ConsoleKey.UpArrow) {
+                if (optionSelected > GenderOptions.Masculino) {
+                    optionSelected--;
+                }
+            }
+            else if (keyboardChoice.Key == ConsoleKey.DownArrow) {
+                if (optionSelected < GenderOptions.Feminino) {
+                    optionSelected++;
+                }
+            }
+            else if (keyboardChoice.Key == ConsoleKey.Enter) {
+                break;
+            }
+        }
+        return optionSelected;
+    }
+    
+    static public PlayerClassOptions ClassChoices() {
+        string[] listOptions = Enum.GetNames(typeof(PlayerClassOptions));
+        PlayerClassOptions optionSelected = PlayerClassOptions.Guerreiro;
+        int optionToPrint;
+
+        while (true) {
+            optionToPrint = (int)optionSelected;
+            ShowChoices(listOptions, listOptions[optionToPrint]);
+
+            ConsoleKeyInfo keyboardChoice = Console.ReadKey();
+            if (keyboardChoice.Key == ConsoleKey.UpArrow) {
+                if (optionSelected > PlayerClassOptions.Guerreiro) {
+                    optionSelected--;
+                }
+            }
+            else if (keyboardChoice.Key == ConsoleKey.DownArrow) {
+                if (optionSelected < PlayerClassOptions.Ladino) {
+                    optionSelected++;
+                }
+            }
+            else if (keyboardChoice.Key == ConsoleKey.Enter) {
+                break;
+            }
+        }
+        return optionSelected;
+    }
+
+    static public BattleOptions BattleChoices(Player JogadorAtual, Enemy InimigoAtual) {
+        string[] listOptions = Enum.GetNames(typeof(BattleOptions));
+        BattleOptions optionSelected = BattleOptions.Lutar;
+        int optionToPrint;
+
+        while (true) {
+            optionToPrint = (int)optionSelected;
+            Cabecalho();
+            InimigoAtual.ShowEnemyStats();
+            JogadorAtual.ShowPlayerStats();
+            ShowChoices(listOptions, listOptions[optionToPrint], false);
+
+            ConsoleKeyInfo keyboardChoice = Console.ReadKey();
+            if (keyboardChoice.Key == ConsoleKey.UpArrow) {
+                if (optionSelected > BattleOptions.Lutar) {
+                    optionSelected--;
+                }
+            }
+            else if (keyboardChoice.Key == ConsoleKey.DownArrow) {
+                if (optionSelected < BattleOptions.Inventario) {
+                    optionSelected++;
+                }
+            }
+            else if (keyboardChoice.Key == ConsoleKey.Enter) {
+                break;
+            }
+        }
+        return optionSelected;
     }
 }
