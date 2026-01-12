@@ -3,32 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\famil\\OneDrive\\Documentos\\Programa\u00E7\u00E3o\\Estudos\\C#\\RogueProgramingGame\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{9FFAC5AD-A806-4BDA-8B37-F9E247F96EE4}|RogueProgramingGame.csproj|c:\\users\\famil\\onedrive\\documentos\\programa\u00E7\u00E3o\\estudos\\c#\\rogueprograminggame\\models\\entity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9FFAC5AD-A806-4BDA-8B37-F9E247F96EE4}|RogueProgramingGame.csproj|solutionrelative:models\\entity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{9FFAC5AD-A806-4BDA-8B37-F9E247F96EE4}|RogueProgramingGame.csproj|c:\\users\\famil\\onedrive\\documentos\\programa\u00E7\u00E3o\\estudos\\c#\\rogueprograminggame\\models\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9FFAC5AD-A806-4BDA-8B37-F9E247F96EE4}|RogueProgramingGame.csproj|solutionrelative:models\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9FFAC5AD-A806-4BDA-8B37-F9E247F96EE4}|RogueProgramingGame.csproj|c:\\users\\famil\\onedrive\\documentos\\programa\u00E7\u00E3o\\estudos\\c#\\rogueprograminggame\\models\\enemy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9FFAC5AD-A806-4BDA-8B37-F9E247F96EE4}|RogueProgramingGame.csproj|solutionrelative:models\\enemy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9FFAC5AD-A806-4BDA-8B37-F9E247F96EE4}|RogueProgramingGame.csproj|c:\\users\\famil\\onedrive\\documentos\\programa\u00E7\u00E3o\\estudos\\c#\\rogueprograminggame\\controllers\\newgame.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9FFAC5AD-A806-4BDA-8B37-F9E247F96EE4}|RogueProgramingGame.csproj|solutionrelative:controllers\\newgame.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9FFAC5AD-A806-4BDA-8B37-F9E247F96EE4}|RogueProgramingGame.csproj|c:\\users\\famil\\onedrive\\documentos\\programa\u00E7\u00E3o\\estudos\\c#\\rogueprograminggame\\controllers\\exitgame.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9FFAC5AD-A806-4BDA-8B37-F9E247F96EE4}|RogueProgramingGame.csproj|solutionrelative:controllers\\exitgame.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9FFAC5AD-A806-4BDA-8B37-F9E247F96EE4}|RogueProgramingGame.csproj|c:\\users\\famil\\onedrive\\documentos\\programa\u00E7\u00E3o\\estudos\\c#\\rogueprograminggame\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9FFAC5AD-A806-4BDA-8B37-F9E247F96EE4}|RogueProgramingGame.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9FFAC5AD-A806-4BDA-8B37-F9E247F96EE4}|RogueProgramingGame.csproj|c:\\users\\famil\\onedrive\\documentos\\programa\u00E7\u00E3o\\estudos\\c#\\rogueprograminggame\\views\\interface.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9FFAC5AD-A806-4BDA-8B37-F9E247F96EE4}|RogueProgramingGame.csproj|solutionrelative:views\\interface.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{9FFAC5AD-A806-4BDA-8B37-F9E247F96EE4}|RogueProgramingGame.csproj|c:\\users\\famil\\onedrive\\documentos\\programa\u00E7\u00E3o\\estudos\\c#\\rogueprograminggame\\controllers\\game.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9FFAC5AD-A806-4BDA-8B37-F9E247F96EE4}|RogueProgramingGame.csproj|solutionrelative:controllers\\game.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,7 +18,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -46,93 +26,28 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Enemy.cs",
-              "DocumentMoniker": "C:\\Users\\famil\\OneDrive\\Documentos\\Programa\u00E7\u00E3o\\Estudos\\C#\\RogueProgramingGame\\Models\\Enemy.cs",
-              "RelativeDocumentMoniker": "Models\\Enemy.cs",
-              "ToolTip": "C:\\Users\\famil\\OneDrive\\Documentos\\Programa\u00E7\u00E3o\\Estudos\\C#\\RogueProgramingGame\\Models\\Enemy.cs",
-              "RelativeToolTip": "Models\\Enemy.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAbAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-11T00:01:20.33Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "Player.cs",
               "DocumentMoniker": "C:\\Users\\famil\\OneDrive\\Documentos\\Programa\u00E7\u00E3o\\Estudos\\C#\\RogueProgramingGame\\Models\\Player.cs",
               "RelativeDocumentMoniker": "Models\\Player.cs",
               "ToolTip": "C:\\Users\\famil\\OneDrive\\Documentos\\Programa\u00E7\u00E3o\\Estudos\\C#\\RogueProgramingGame\\Models\\Player.cs",
               "RelativeToolTip": "Models\\Player.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAeAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-11T00:00:12.036Z",
+              "WhenOpened": "2026-01-12T00:16:32.445Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "NewGame.cs",
-              "DocumentMoniker": "C:\\Users\\famil\\OneDrive\\Documentos\\Programa\u00E7\u00E3o\\Estudos\\C#\\RogueProgramingGame\\Controllers\\NewGame.cs",
-              "RelativeDocumentMoniker": "Controllers\\NewGame.cs",
-              "ToolTip": "C:\\Users\\famil\\OneDrive\\Documentos\\Programa\u00E7\u00E3o\\Estudos\\C#\\RogueProgramingGame\\Controllers\\NewGame.cs",
-              "RelativeToolTip": "Controllers\\NewGame.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAjAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "Game.cs",
+              "DocumentMoniker": "C:\\Users\\famil\\OneDrive\\Documentos\\Programa\u00E7\u00E3o\\Estudos\\C#\\RogueProgramingGame\\Controllers\\Game.cs",
+              "RelativeDocumentMoniker": "Controllers\\Game.cs",
+              "ToolTip": "C:\\Users\\famil\\OneDrive\\Documentos\\Programa\u00E7\u00E3o\\Estudos\\C#\\RogueProgramingGame\\Controllers\\Game.cs",
+              "RelativeToolTip": "Controllers\\Game.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAgwBMAAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-10T23:56:35.152Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "ExitGame.cs",
-              "DocumentMoniker": "C:\\Users\\famil\\OneDrive\\Documentos\\Programa\u00E7\u00E3o\\Estudos\\C#\\RogueProgramingGame\\Controllers\\ExitGame.cs",
-              "RelativeDocumentMoniker": "Controllers\\ExitGame.cs",
-              "ToolTip": "C:\\Users\\famil\\OneDrive\\Documentos\\Programa\u00E7\u00E3o\\Estudos\\C#\\RogueProgramingGame\\Controllers\\ExitGame.cs",
-              "RelativeToolTip": "Controllers\\ExitGame.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-10T23:56:26.266Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Entity.cs",
-              "DocumentMoniker": "C:\\Users\\famil\\OneDrive\\Documentos\\Programa\u00E7\u00E3o\\Estudos\\C#\\RogueProgramingGame\\Models\\Entity.cs",
-              "RelativeDocumentMoniker": "Models\\Entity.cs",
-              "ToolTip": "C:\\Users\\famil\\OneDrive\\Documentos\\Programa\u00E7\u00E3o\\Estudos\\C#\\RogueProgramingGame\\Models\\Entity.cs",
-              "RelativeToolTip": "Models\\Entity.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAApAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-10T23:51:06.757Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\famil\\OneDrive\\Documentos\\Programa\u00E7\u00E3o\\Estudos\\C#\\RogueProgramingGame\\Program.cs",
-              "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "C:\\Users\\famil\\OneDrive\\Documentos\\Programa\u00E7\u00E3o\\Estudos\\C#\\RogueProgramingGame\\Program.cs",
-              "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAA7AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-10T23:49:31.006Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Interface.cs",
-              "DocumentMoniker": "C:\\Users\\famil\\OneDrive\\Documentos\\Programa\u00E7\u00E3o\\Estudos\\C#\\RogueProgramingGame\\Views\\Interface.cs",
-              "RelativeDocumentMoniker": "Views\\Interface.cs",
-              "ToolTip": "C:\\Users\\famil\\OneDrive\\Documentos\\Programa\u00E7\u00E3o\\Estudos\\C#\\RogueProgramingGame\\Views\\Interface.cs",
-              "RelativeToolTip": "Views\\Interface.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-10T18:05:28.763Z",
+              "WhenOpened": "2026-01-12T00:16:02.429Z",
               "EditorCaption": ""
             }
           ]

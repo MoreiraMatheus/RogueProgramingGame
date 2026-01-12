@@ -6,9 +6,8 @@ public class Player : Entity {
     public int Xp = 0;
 
     public void ChoseGender() {
-        int newGender = 1;
-        Interface.Choices(ref newGender, ["M", "F"]);
-        Gender = newGender == 1 ? 'M' : 'F';
+        int newGender = (int)Interface.GenderChoices();
+        Gender = newGender == 0 ? 'M' : 'F';
     }
     public void ChoseGender(char newGender) {
         Gender = newGender;
@@ -39,9 +38,9 @@ public class Player : Entity {
     }
 
     public void ChoseClass() {
-        int playerClassChecker = 1;
-        Interface.Choices(ref playerClassChecker, ["Guerreiro", "Tank", "Ladino"]);
-        if (playerClassChecker == 1) {
+        PlayerClassOptions playerClass = Interface.ClassChoices();
+
+        if (playerClass == PlayerClassOptions.Guerreiro) {
             PlayerClass = "Guerreiro(a)";
             Hp += 2;
             MaxHp += 2;
@@ -49,7 +48,7 @@ public class Player : Entity {
             Def = 2;
             Spd = 1;
         }
-        else if (playerClassChecker == 2) {
+        else if (playerClass == PlayerClassOptions.Tank) {
             PlayerClass = "Tank";
             Hp += 2;
             MaxHp += 2;
@@ -57,7 +56,7 @@ public class Player : Entity {
             Def = 5;
             Spd = 1;
         }
-        else if (playerClassChecker == 3) {
+        else if (playerClass == PlayerClassOptions.Ladino) {
             PlayerClass = "Ladino(a)";
             Hp++;
             MaxHp++;
@@ -105,5 +104,11 @@ public class Player : Entity {
             Console.Write("-");
         }
         Console.Write("\n");
+    }
+
+    public Player() {
+        ChoseName();
+        ChoseGender();
+        ChoseClass();
     }
 }

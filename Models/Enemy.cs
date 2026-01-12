@@ -33,11 +33,11 @@ public class Enemy : Entity {
     }
 
     public void EnemyBattle(Player Player, string battleMessage) {
-        int playerChoiceChecker = 1;
+        BattleOptions battleOptionChoiced;
 
         while (true) {
-            playerChoiceChecker = Interface.BatleChoices(playerChoiceChecker, Player, this, battleMessage: battleMessage);
-            if (playerChoiceChecker == 1) {
+            battleOptionChoiced = Interface.BattleChoices(Player, this);
+            if (battleOptionChoiced == BattleOptions.Lutar) {
                 Interface.Cabecalho();
                 Damaged(Player.Str);
                 if (Hp == 0) {
@@ -46,15 +46,20 @@ public class Enemy : Entity {
                     break;
                 }
             }
-            else if (playerChoiceChecker == 2) {
+            else if (battleOptionChoiced == BattleOptions.Aguardar) {
                 Interface.Cabecalho();
-                Console.WriteLine("O Goblin te encara, desconfiado.");
+                Console.WriteLine("O Inimigo te encara, desconfiado.");
                 Interface.Await();
             }
-            else if (playerChoiceChecker == 3) {
+            else if (battleOptionChoiced == BattleOptions.Correr) {
                 Interface.Cabecalho();
                 Console.WriteLine("Você fugiu da luta");
                 Interface.Await();
+                break;
+            }
+            else if (battleOptionChoiced == BattleOptions.Inventario) {
+                Interface.Cabecalho();
+                Console.WriteLine("Nada na bolsa");
                 break;
             }
             Player.Damaged(Str);
