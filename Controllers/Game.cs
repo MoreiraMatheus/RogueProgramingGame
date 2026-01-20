@@ -2,7 +2,8 @@
 
 public static class Game {
     public static void Start() {
-        MenuOptions EscolhaMenu = Interface.MenuChoices();
+        //MenuOptions EscolhaMenu = Interface.MenuChoices();
+        MenuOptions EscolhaMenu = Interface.GenericChoices<MenuOptions>();
 
         if (EscolhaMenu == MenuOptions.Novo_Jogo) {
             NewGame();

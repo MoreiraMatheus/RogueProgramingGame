@@ -6,6 +6,7 @@ public class Player : Entity {
     public int Xp = 0;
 
     public void ChoseGender() {
+        Interface.Cabecalho();
         int newGender = (int)Interface.GenderChoices();
         Gender = newGender == 0 ? 'M' : 'F';
     }
@@ -31,10 +32,10 @@ public class Player : Entity {
             }
             else {
                 PlayerNameChecker = PlayerNameChecker.ToUpper().Substring(0, 1) + PlayerNameChecker.Substring(1, PlayerNameChecker.Length - 1);
-                Name = PlayerNameChecker;
                 break;
             }
         }
+        Name = PlayerNameChecker;
     }
 
     public void ChoseClass() {
@@ -51,7 +52,7 @@ public class Player : Entity {
         else if (playerClass == PlayerClassOptions.Tank) {
             PlayerClass = "Tank";
             Hp += 2;
-            MaxHp += 2;
+            MaxHp += 2; 
             Str = 2;
             Def = 5;
             Spd = 1;

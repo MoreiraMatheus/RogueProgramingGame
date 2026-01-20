@@ -61,6 +61,33 @@ static class Interface {
 
     //Choices
 
+    static public T GenericChoices<T>() {
+        string[] listOptions = Enum.GetNames(typeof(T));
+        T optionSelected = (T)Enum.GetValues(typeof(T)).GetValue(0);
+        int optionToPrint;
+
+        while (true) {
+            optionToPrint = Convert.ToInt32(optionSelected);
+            ShowChoices(listOptions, listOptions[optionToPrint]);
+
+            ConsoleKeyInfo keyboardChoice = Console.ReadKey();
+            if (keyboardChoice.Key == ConsoleKey.UpArrow) {
+                if (optionToPrint > 0) {
+                    optionSelected = (T)Enum.ToObject(typeof(T), optionToPrint - 1);
+                }
+            }
+            else if (keyboardChoice.Key == ConsoleKey.DownArrow) {
+                if (optionToPrint < listOptions.Length - 1) {
+                    optionSelected = (T)Enum.ToObject(typeof(T), optionToPrint + 1);
+                }
+            }
+            else if (keyboardChoice.Key == ConsoleKey.Enter) {
+                break;
+            }
+        }
+        return optionSelected;
+    }
+
     static public MenuOptions MenuChoices() {
         string[] listOptions = Enum.GetNames(typeof(MenuOptions));
         MenuOptions optionSelected = MenuOptions.Novo_Jogo;
