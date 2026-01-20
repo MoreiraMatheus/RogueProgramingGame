@@ -67,6 +67,7 @@ public class Player : Entity {
         }
     }
 
+    //TODO usar as funções presentes na interface da View
     public void ShowPlayerStats() {
         Console.Write(" - ");
         if (Gender == 'F') {

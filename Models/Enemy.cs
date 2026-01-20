@@ -1,6 +1,7 @@
 ﻿namespace RogueProgramingGame.Models;
 
 public class Enemy : Entity {
+    //TODO usar as funções presentes na interface da View
     public void ShowEnemyStats(bool ShowVersus = true) {
         Console.Write($" - {Name} ");
         for (int i = 0; i < 45 - Name.Length; i++) {

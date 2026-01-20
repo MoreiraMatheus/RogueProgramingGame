@@ -1,5 +1,6 @@
 ﻿namespace RogueProgramingGame.Controllers;
 static class Interface{
+    // TODO Passar pra cá tudo que tiver a ver com a controler, mas só após refatorar tudo lá na view
     static public EnumType Choices<EnumType>() {
         string[] listOptions = Enum.GetNames(typeof(EnumType));
         EnumType optionSelected = (EnumType)Enum.GetValues(typeof(EnumType)).GetValue(0);
