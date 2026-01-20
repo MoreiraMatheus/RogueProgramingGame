@@ -1,4 +1,4 @@
-﻿namespace RogueProgramingGame;
+﻿namespace RogueProgramingGame.Models;
 
 public class Player : Entity {
     public char Gender;
@@ -6,7 +6,8 @@ public class Player : Entity {
     public int Xp = 0;
 
     public void ChoseGender() {
-        int newGender = (int)Interface.GenderChoices();
+        View.Interface.Header();
+        int newGender = (int)Controllers.Interface.Choices <Models.Enums.GenderOptions>();
         Gender = newGender == 0 ? 'M' : 'F';
     }
     public void ChoseGender(char newGender) {
@@ -16,31 +17,31 @@ public class Player : Entity {
     public void ChoseName() {
         string PlayerNameChecker;
         while (true) {
-            Interface.Cabecalho();
+            View.Interface.Header();
             Console.Write("Digite seu nome: ");
             PlayerNameChecker = Console.ReadLine();
             PlayerNameChecker = PlayerNameChecker.Trim();
             PlayerNameChecker = PlayerNameChecker.ToLower();
             if (PlayerNameChecker == "") {
-                Interface.Cabecalho();
+                View.Interface.Header();
                 Console.WriteLine("O nome do jogador é obrigatório.");
             }
             else if (PlayerNameChecker.Length > 20) {
-                Interface.Cabecalho();
+                View.Interface.Header();
                 Console.WriteLine("Por favor, digite um nome menor (limite de 20 caracteres).");
             }
             else {
                 PlayerNameChecker = PlayerNameChecker.ToUpper().Substring(0, 1) + PlayerNameChecker.Substring(1, PlayerNameChecker.Length - 1);
-                Name = PlayerNameChecker;
                 break;
             }
         }
+        Name = PlayerNameChecker;
     }
 
     public void ChoseClass() {
-        PlayerClassOptions playerClass = Interface.ClassChoices();
+        Models.Enums.PlayerClassOptions playerClass = Controllers.Interface.Choices<Models.Enums.PlayerClassOptions>();
 
-        if (playerClass == PlayerClassOptions.Guerreiro) {
+        if (playerClass == Models.Enums.PlayerClassOptions.Guerreiro) {
             PlayerClass = "Guerreiro(a)";
             Hp += 2;
             MaxHp += 2;
@@ -48,15 +49,15 @@ public class Player : Entity {
             Def = 2;
             Spd = 1;
         }
-        else if (playerClass == PlayerClassOptions.Tank) {
+        else if (playerClass == Models.Enums.PlayerClassOptions.Tank) {
             PlayerClass = "Tank";
             Hp += 2;
-            MaxHp += 2;
+            MaxHp += 2; 
             Str = 2;
             Def = 5;
             Spd = 1;
         }
-        else if (playerClass == PlayerClassOptions.Ladino) {
+        else if (playerClass == Models.Enums.PlayerClassOptions.Ladino) {
             PlayerClass = "Ladino(a)";
             Hp++;
             MaxHp++;
@@ -66,6 +67,7 @@ public class Player : Entity {
         }
     }
 
+    //TODO usar as funções presentes na interface da View
     public void ShowPlayerStats() {
         Console.Write(" - ");
         if (Gender == 'F') {

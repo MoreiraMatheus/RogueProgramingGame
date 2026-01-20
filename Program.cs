@@ -2,8 +2,14 @@
 public class Program {
 
     static void Main() {
-        Game.Start();
+        //Controllers.Game.Start();
 
-        Interface.Await("\nFim do programa");
+        Models.Player Jogador = new Models.Player();
+
+        View.Interface.Divider();
+        View.Interface.TitleBox(Jogador);
+        View.Interface.MenuEmptyLine();
+
+        View.Interface.Await("\nFim do programa");
     }
 }

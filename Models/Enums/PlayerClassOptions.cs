@@ -1,4 +1,4 @@
-namespace RogueProgramingGame {
+namespace RogueProgramingGame.Models.Enums {
     enum PlayerClassOptions {
         Guerreiro,
         Tank,
