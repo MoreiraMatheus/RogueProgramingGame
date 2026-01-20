@@ -1,4 +1,4 @@
-namespace RogueProgramingGame { 
+namespace RogueProgramingGame.Models.Enums { 
     enum BattleOptions {
         Lutar,
         Aguardar,

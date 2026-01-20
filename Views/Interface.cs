@@ -1,4 +1,4 @@
-﻿namespace RogueProgramingGame;
+﻿namespace RogueProgramingGame.View;
 
 static class Interface {
 
@@ -9,7 +9,7 @@ static class Interface {
         Console.Write("\n");
     }
 
-    static public void Cabecalho() {
+    static public void Header() {
         Console.Clear();
         Divider();
         Console.WriteLine("\t\tRogue Programing Game\n");
@@ -26,7 +26,7 @@ static class Interface {
     }
     static public void Await(string mensagem) {
         Console.WriteLine(mensagem);
-        while (true) {
+         while (true) {
             ConsoleKeyInfo keyboardChoice = Console.ReadKey();
             if (keyboardChoice.Key == ConsoleKey.Enter) {
                 break;
@@ -34,8 +34,8 @@ static class Interface {
         }
     }
     
-    private static void ShowChoices(string[] options, string currentOption) {
-        Cabecalho();
+    public static void ShowChoices(string[] options, string currentOption) {
+        Header();
         foreach (string option in options) {
             if (option == currentOption) {
                 Console.WriteLine($"--> {option.Replace('_', ' ')}");
@@ -45,9 +45,9 @@ static class Interface {
             }
         }
     }
-    private static void ShowChoices(string[] options, string currentOption, bool showHeader) {
+    public static void ShowChoices(string[] options, string currentOption, bool showHeader) {
         if (showHeader) {
-            Cabecalho();
+            Header();
         }
         foreach (string option in options) {
             if (option == currentOption) {
@@ -57,145 +57,5 @@ static class Interface {
                 Console.WriteLine($"    {option.Replace('_', ' ')}");
             }
         }
-    }
-
-    //Choices
-
-    static public T GenericChoices<T>() {
-        string[] listOptions = Enum.GetNames(typeof(T));
-        T optionSelected = (T)Enum.GetValues(typeof(T)).GetValue(0);
-        int optionToPrint;
-
-        while (true) {
-            optionToPrint = Convert.ToInt32(optionSelected);
-            ShowChoices(listOptions, listOptions[optionToPrint]);
-
-            ConsoleKeyInfo keyboardChoice = Console.ReadKey();
-            if (keyboardChoice.Key == ConsoleKey.UpArrow) {
-                if (optionToPrint > 0) {
-                    optionSelected = (T)Enum.ToObject(typeof(T), optionToPrint - 1);
-                }
-            }
-            else if (keyboardChoice.Key == ConsoleKey.DownArrow) {
-                if (optionToPrint < listOptions.Length - 1) {
-                    optionSelected = (T)Enum.ToObject(typeof(T), optionToPrint + 1);
-                }
-            }
-            else if (keyboardChoice.Key == ConsoleKey.Enter) {
-                break;
-            }
-        }
-        return optionSelected;
-    }
-
-    static public MenuOptions MenuChoices() {
-        string[] listOptions = Enum.GetNames(typeof(MenuOptions));
-        MenuOptions optionSelected = MenuOptions.Novo_Jogo;
-        int optionToPrint;
-
-        while (true) {
-            optionToPrint = (int)optionSelected;
-            ShowChoices(listOptions, listOptions[optionToPrint]);
-
-            ConsoleKeyInfo keyboardChoice = Console.ReadKey();
-            if (keyboardChoice.Key == ConsoleKey.UpArrow) {
-                if (optionSelected > MenuOptions.Novo_Jogo) {
-                    optionSelected--;
-                }
-            }
-            else if (keyboardChoice.Key == ConsoleKey.DownArrow) {
-                if (optionSelected < MenuOptions.Sair) {
-                    optionSelected++;
-                }
-            }
-            else if (keyboardChoice.Key == ConsoleKey.Enter) {
-                break;
-            }
-        }
-        return optionSelected;
-    }
-    
-    static public GenderOptions GenderChoices() {
-        string[] listOptions = Enum.GetNames(typeof(GenderOptions));
-        GenderOptions optionSelected = GenderOptions.Masculino;
-        int optionToPrint;
-
-        while (true) {
-            optionToPrint = (int)optionSelected;
-            ShowChoices(listOptions, listOptions[optionToPrint]);
-
-            ConsoleKeyInfo keyboardChoice = Console.ReadKey();
-            if (keyboardChoice.Key == ConsoleKey.UpArrow) {
-                if (optionSelected > GenderOptions.Masculino) {
-                    optionSelected--;
-                }
-            }
-            else if (keyboardChoice.Key == ConsoleKey.DownArrow) {
-                if (optionSelected < GenderOptions.Feminino) {
-                    optionSelected++;
-                }
-            }
-            else if (keyboardChoice.Key == ConsoleKey.Enter) {
-                break;
-            }
-        }
-        return optionSelected;
-    }
-    
-    static public PlayerClassOptions ClassChoices() {
-        string[] listOptions = Enum.GetNames(typeof(PlayerClassOptions));
-        PlayerClassOptions optionSelected = PlayerClassOptions.Guerreiro;
-        int optionToPrint;
-
-        while (true) {
-            optionToPrint = (int)optionSelected;
-            ShowChoices(listOptions, listOptions[optionToPrint]);
-
-            ConsoleKeyInfo keyboardChoice = Console.ReadKey();
-            if (keyboardChoice.Key == ConsoleKey.UpArrow) {
-                if (optionSelected > PlayerClassOptions.Guerreiro) {
-                    optionSelected--;
-                }
-            }
-            else if (keyboardChoice.Key == ConsoleKey.DownArrow) {
-                if (optionSelected < PlayerClassOptions.Ladino) {
-                    optionSelected++;
-                }
-            }
-            else if (keyboardChoice.Key == ConsoleKey.Enter) {
-                break;
-            }
-        }
-        return optionSelected;
-    }
-
-    static public BattleOptions BattleChoices(Player JogadorAtual, Enemy InimigoAtual) {
-        string[] listOptions = Enum.GetNames(typeof(BattleOptions));
-        BattleOptions optionSelected = BattleOptions.Lutar;
-        int optionToPrint;
-
-        while (true) {
-            optionToPrint = (int)optionSelected;
-            Cabecalho();
-            InimigoAtual.ShowEnemyStats();
-            JogadorAtual.ShowPlayerStats();
-            ShowChoices(listOptions, listOptions[optionToPrint], false);
-
-            ConsoleKeyInfo keyboardChoice = Console.ReadKey();
-            if (keyboardChoice.Key == ConsoleKey.UpArrow) {
-                if (optionSelected > BattleOptions.Lutar) {
-                    optionSelected--;
-                }
-            }
-            else if (keyboardChoice.Key == ConsoleKey.DownArrow) {
-                if (optionSelected < BattleOptions.Inventario) {
-                    optionSelected++;
-                }
-            }
-            else if (keyboardChoice.Key == ConsoleKey.Enter) {
-                break;
-            }
-        }
-        return optionSelected;
     }
 }

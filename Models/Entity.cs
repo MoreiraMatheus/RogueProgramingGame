@@ -1,5 +1,6 @@
-﻿namespace RogueProgramingGame;
+﻿namespace RogueProgramingGame.Models;
 
+//TODO revisar essa classe e transformar ela em uma classe abstrata ou coisa parecida
 public class Entity {
     public string Name;
     public int Hp = 10;

@@ -2,8 +2,8 @@
 public class Program {
 
     static void Main() {
-        Game.Start();
+        Controllers.Game.Start();
 
-        Interface.Await("\nFim do programa");
+        View.Interface.Await("\nFim do programa");
     }
 }

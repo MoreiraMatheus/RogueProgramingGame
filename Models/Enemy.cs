@@ -1,4 +1,4 @@
-﻿namespace RogueProgramingGame;
+﻿namespace RogueProgramingGame.Models;
 
 public class Enemy : Entity {
     public void ShowEnemyStats(bool ShowVersus = true) {
@@ -33,32 +33,32 @@ public class Enemy : Entity {
     }
 
     public void EnemyBattle(Player Player, string battleMessage) {
-        BattleOptions battleOptionChoiced;
+        Models.Enums.BattleOptions battleOptionChoiced;
 
         while (true) {
-            battleOptionChoiced = Interface.BattleChoices(Player, this);
-            if (battleOptionChoiced == BattleOptions.Lutar) {
-                Interface.Cabecalho();
+            battleOptionChoiced = Controllers.Interface.BattleChoices(Player, this);
+            if (battleOptionChoiced == Models.Enums.BattleOptions.Lutar) {
+                View.Interface.Header();
                 Damaged(Player.Str);
                 if (Hp == 0) {
                     Console.WriteLine("Você venceu, o seu inimigo foi derrotado!");
-                    Interface.Await();
+                    View.Interface.Await();
                     break;
                 }
             }
-            else if (battleOptionChoiced == BattleOptions.Aguardar) {
-                Interface.Cabecalho();
+            else if (battleOptionChoiced == Models.Enums.BattleOptions.Aguardar) {
+                View.Interface.Header();
                 Console.WriteLine("O Inimigo te encara, desconfiado.");
-                Interface.Await();
+                View.Interface.Await();
             }
-            else if (battleOptionChoiced == BattleOptions.Correr) {
-                Interface.Cabecalho();
+            else if (battleOptionChoiced == Models.Enums.BattleOptions.Correr) {
+                View.Interface.Header();
                 Console.WriteLine("Você fugiu da luta");
-                Interface.Await();
+                View.Interface.Await();
                 break;
             }
-            else if (battleOptionChoiced == BattleOptions.Inventario) {
-                Interface.Cabecalho();
+            else if (battleOptionChoiced == Models.Enums.BattleOptions.Inventario) {
+                View.Interface.Header();
                 Console.WriteLine("Nada na bolsa");
                 break;
             }
