@@ -2,7 +2,6 @@
 
 public static class Game {
     public static void Start() {
-        //MenuOptions EscolhaMenu = Interface.MenuChoices();
         Models.Enums.MenuOptions EscolhaMenu =  Controllers.Interface.Choices<Models.Enums.MenuOptions>();
 
         if (EscolhaMenu == Models.Enums.MenuOptions.Novo_Jogo) {
@@ -24,6 +23,8 @@ public static class Game {
         Jogador.ShowPlayerStats();
         Console.WriteLine($"Você jogará como {Jogador.PlayerClass}, excelente escolha! Agora sim podemos dar inicio a sua jornada.");
         View.Interface.Await();
+
+        //TODO Criar uma forma de gerar 3 inimigos aleatórios
 
         //Inimigo 1
         Models.Enemy firstEnemy = new Models.Enemy();
@@ -50,10 +51,12 @@ public static class Game {
     }
 
     public static void LoadGame() {
+        //TODO fazer uma forma de retomar o save
         Console.WriteLine("Nada por aqui ainda.");
     }
 
     public static void ExitGame() {
+        //TODO fazer os 3 pontinhos piscarem como se estivesse carregando
         Console.WriteLine("Saindo...");
     }
 }

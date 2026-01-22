@@ -67,45 +67,13 @@ public class Player : Entity {
         }
     }
 
-    //TODO usar as funções presentes na interface da View
     public void ShowPlayerStats() {
-        Console.Write(" - ");
-        if (Gender == 'F') {
-            Console.ForegroundColor = ConsoleColor.Magenta;
-        }
-        else {
-            Console.ForegroundColor = ConsoleColor.Blue;
-        }
-        Console.Write(Name);
-        Console.ResetColor();
-        Console.Write($" - {PlayerClass} ");
-        for (int i = 0; i < 42 - Name.Length - PlayerClass.Length; i++) {
-            Console.Write("-");
-        }
-        Console.WriteLine("\n|                                                |");
-        Console.Write("| HP: ");
-        Console.ForegroundColor = ConsoleColor.Green;
-        for (int i = 0; i < Hp; i++) {
-            Console.Write("/");
-        }
-        Console.ResetColor();
-        if (Hp != MaxHp) {
-            for (int i = 0; i < MaxHp - Hp; i++) {
-                Console.Write("/");
-            }
-        }
-        for (int i = 0; i < 43 - MaxHp; i++) {
-            Console.Write(" ");
-        }
-        Console.Write($"|\n| STR: {Str} DEF: {Def} SPD: {Spd}");
-        for (int i = 0; i < 30 - Str.ToString().Length - Def.ToString().Length - Spd.ToString().Length; i++) {
-            Console.Write(" ");
-        }
-        Console.Write("|\n|                                                |\n ");
-        for (int i = 0; i < 48; i++) {
-            Console.Write("-");
-        }
-        Console.Write("\n");
+        View.Interface.TitleBox(this);
+        View.Interface.MenuEmptyLine();
+        View.Interface.ShowHP(Hp, MaxHp);
+        View.Interface.AddInMenuBox($"STR: {Str} DEF: {Def} SPD: {Spd}");
+        View.Interface.MenuEmptyLine();
+        View.Interface.Divider();
     }
 
     public Player() {
