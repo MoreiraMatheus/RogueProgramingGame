@@ -36,8 +36,8 @@ static class Interface{
         while (true) {
             optionToPrint = (int)optionSelected;
             View.Interface.Header();
-            InimigoAtual.ShowEnemyStats();
-            JogadorAtual.ShowPlayerStats();
+            InimigoAtual.ShowStats();
+            JogadorAtual.ShowStats();
             View.Interface.ShowChoices(listOptions, listOptions[optionToPrint], false);
 
             ConsoleKeyInfo keyboardChoice = Console.ReadKey();

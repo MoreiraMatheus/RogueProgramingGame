@@ -67,7 +67,7 @@ public class Player : Entity {
         }
     }
 
-    public void ShowPlayerStats() {
+    public void ShowStats() {
         View.Interface.TitleBox(this);
         View.Interface.MenuEmptyLine();
         View.Interface.ShowHP(Hp, MaxHp);
