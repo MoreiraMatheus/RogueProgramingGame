@@ -99,6 +99,24 @@ static class Interface {
         Console.WriteLine("                      ==VS==");
     }
 
+    static public void ShowHP(int hp, int maxHp) {
+        Console.Write("| HP: ");
+        Console.ForegroundColor = ConsoleColor.Green;
+        for (int i = 0; i < hp; i++) {
+            Console.Write("/");
+        }
+        Console.ResetColor();
+        if (hp != maxHp) {
+            for (int i = 0; i < maxHp - hp; i++) {
+                Console.Write("/");
+            }
+        }
+        for (int i = 0; i < 43 - maxHp; i++) {
+            Console.Write(" ");
+        }
+        Console.WriteLine("|");
+    }
+
     public static void ShowChoices(string[] options, string currentOption) {
         Header();
         foreach (string option in options) {
