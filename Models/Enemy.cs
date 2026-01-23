@@ -9,4 +9,8 @@ public class Enemy : Entity {
         View.Interface.Divider();
         View.Interface.ShowVersus();
     }
+
+    public Enemy() {
+        Str = 1;
+    }
 }
