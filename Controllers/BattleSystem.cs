@@ -5,31 +5,55 @@ public static class BattleSystem {
 
         while (true) {
             battleOptionChoiced = Interface.BattleChoices(player, enemy);
+
             if (battleOptionChoiced == Models.Enums.BattleOptions.Lutar) {
-                View.Interface.Header();
-                View.Interface.Await("Você acertou o seu inimigo.");
-                enemy.Damaged(player.Str);
-                if (enemy.Hp == 0) {
-                    //Console.WriteLine();
-                    View.Interface.Await("Você venceu, o seu inimigo foi derrotado!");
-                    break;
-                }
+                Lutar(player, enemy);
             }
             else if (battleOptionChoiced == Models.Enums.BattleOptions.Aguardar) {
-                View.Interface.Header();
-                View.Interface.Await("O Inimigo te encara, desconfiado.");
+                Aguardar();
             }
             else if (battleOptionChoiced == Models.Enums.BattleOptions.Correr) {
-                View.Interface.Header();
-                View.Interface.Await("Você fugiu da luta");
+                Correr();
                 break;
             }
             else if (battleOptionChoiced == Models.Enums.BattleOptions.Inventario) {
-                View.Interface.Header();
-                View.Interface.Await("Nada na bolsa");
+                Inventario(player);
+            }
+            if (enemy.Hp == 0) {
+                View.Interface.Await("Você venceu, o seu inimigo foi derrotado!");
                 break;
             }
             player.Damaged(enemy.Str);
+            View.Interface.Await($"Você foi atingido e recebeu {enemy.Str} de dano");
+        }
+    }
+
+    private static void Lutar(Models.Player player, Models.Enemy enemy) {
+        View.Interface.Header();
+        enemy.Damaged(player.Str);
+        View.Interface.Await($"Você acertou o seu inimigo.");
+        View.Interface.Await($"{enemy.Name} recebeu {player.Str} de dano.");
+    }
+
+    private static void Aguardar() {
+        View.Interface.Header();
+        View.Interface.Await("O Inimigo te encara, desconfiado.");
+    }
+
+    private static void Correr() {
+        View.Interface.Header();
+        View.Interface.Await("Você fugiu da luta e evitou receber dano.");
+    }
+
+    private static void Inventario(Models.Player player) {
+        View.Interface.Header();
+        if (player.BackPack.Length >= 1) {
+            Console.WriteLine("Itens na bolsa:");
+            View.Interface.ShowBackPackItems(player.BackPack);
+            View.Interface.Await();
+        }
+        else {
+            View.Interface.Await("Nada na bolsa.");
         }
     }
 }

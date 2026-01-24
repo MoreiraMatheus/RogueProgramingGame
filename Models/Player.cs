@@ -4,6 +4,7 @@ public class Player : Entity {
     public char Gender;
     public string PlayerClass;
     public int Xp = 0;
+    public string[] BackPack = ["Poção de cura", "Bomba de fumaça", "Chave do pálio"];
 
     public void ChoseGender() {
         View.Interface.Header();
