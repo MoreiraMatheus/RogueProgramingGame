@@ -13,7 +13,7 @@ static class Interface {
     }
 
     static public void Header() {
-        Console.Clear();
+        Console.Clear(); //TODO remover
         Divider();
         Console.WriteLine("\n\t\tRogue Programing Game\n");
         Divider();
@@ -42,7 +42,7 @@ static class Interface {
         for (int i = 0; i < 48; i++) {
             Console.Write(" ");
         }
-        Console.Write("|\n");
+        Console.WriteLine("|");
     }
 
     static public void AddInMenuBox(string content) {
@@ -116,20 +116,7 @@ static class Interface {
         }
         Console.WriteLine("|");
     }
-
-    public static void ShowChoices(string[] options, string currentOption) {
-        Header();
-        foreach (string option in options) {
-            if (option == currentOption) {
-                AddInMenuBox($"--> {option.Replace('_', ' ')}");
-            }
-            else {
-                AddInMenuBox($"    {option.Replace('_', ' ')}");
-            }
-        }
-        Divider();
-    }
-    public static void ShowChoices(string[] options, string currentOption, bool showHeader) {
+    public static void ShowChoices(string[] options, string currentOption, bool showHeader=true) {
         if (showHeader) {
             Header();
         }
@@ -142,5 +129,14 @@ static class Interface {
             }
         }
         Divider();
+    }
+
+    public static void ShowBackPackItems(string[] backpack) {
+        foreach (string item in backpack) {
+            Console.Write(" - ");
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.WriteLine(item);
+            Console.ResetColor();
+        }
     }
 }
