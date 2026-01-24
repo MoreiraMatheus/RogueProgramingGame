@@ -7,7 +7,7 @@ public class Player : Entity {
 
     public void ChoseGender() {
         View.Interface.Header();
-        int newGender = (int)Controllers.Interface.Choices <Models.Enums.GenderOptions>();
+        int newGender = (int)Controllers.Interface.Choices <Enums.GenderOptions>();
         Gender = newGender == 0 ? 'M' : 'F';
     }
     public void ChoseGender(char newGender) {
@@ -24,11 +24,11 @@ public class Player : Entity {
             PlayerNameChecker = PlayerNameChecker.ToLower();
             if (PlayerNameChecker == "") {
                 View.Interface.Header();
-                Console.WriteLine("O nome do jogador é obrigatório.");
+                View.Interface.Await("O nome do jogador é obrigatório.");
             }
             else if (PlayerNameChecker.Length > 20) {
                 View.Interface.Header();
-                Console.WriteLine("Por favor, digite um nome menor (limite de 20 caracteres).");
+                View.Interface.Await("Por favor, digite um nome menor (limite de 20 caracteres).");
             }
             else {
                 PlayerNameChecker = PlayerNameChecker.ToUpper().Substring(0, 1) + PlayerNameChecker.Substring(1, PlayerNameChecker.Length - 1);
@@ -39,9 +39,9 @@ public class Player : Entity {
     }
 
     public void ChoseClass() {
-        Models.Enums.PlayerClassOptions playerClass = Controllers.Interface.Choices<Models.Enums.PlayerClassOptions>();
+        Enums.PlayerClassOptions playerClass = Controllers.Interface.Choices<Enums.PlayerClassOptions>();
 
-        if (playerClass == Models.Enums.PlayerClassOptions.Guerreiro) {
+        if (playerClass == Enums.PlayerClassOptions.Guerreiro) {
             PlayerClass = "Guerreiro(a)";
             Hp += 2;
             MaxHp += 2;
@@ -49,7 +49,7 @@ public class Player : Entity {
             Def = 2;
             Spd = 1;
         }
-        else if (playerClass == Models.Enums.PlayerClassOptions.Tank) {
+        else if (playerClass == Enums.PlayerClassOptions.Tank) {
             PlayerClass = "Tank";
             Hp += 2;
             MaxHp += 2; 
@@ -57,7 +57,7 @@ public class Player : Entity {
             Def = 5;
             Spd = 1;
         }
-        else if (playerClass == Models.Enums.PlayerClassOptions.Ladino) {
+        else if (playerClass == Enums.PlayerClassOptions.Ladino) {
             PlayerClass = "Ladino(a)";
             Hp++;
             MaxHp++;

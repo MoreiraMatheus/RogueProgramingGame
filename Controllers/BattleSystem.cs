@@ -4,31 +4,29 @@ public static class BattleSystem {
         Models.Enums.BattleOptions battleOptionChoiced;
 
         while (true) {
-            //TODO apresentar as mensagens sem pular direto pra próxima tela
-            battleOptionChoiced = Controllers.Interface.BattleChoices(player, enemy);
+            battleOptionChoiced = Interface.BattleChoices(player, enemy);
             if (battleOptionChoiced == Models.Enums.BattleOptions.Lutar) {
                 View.Interface.Header();
+                View.Interface.Await("Você acertou o seu inimigo.");
                 enemy.Damaged(player.Str);
                 if (enemy.Hp == 0) {
-                    Console.WriteLine("Você venceu, o seu inimigo foi derrotado!");
-                    View.Interface.Await();
+                    //Console.WriteLine();
+                    View.Interface.Await("Você venceu, o seu inimigo foi derrotado!");
                     break;
                 }
             }
             else if (battleOptionChoiced == Models.Enums.BattleOptions.Aguardar) {
                 View.Interface.Header();
-                Console.WriteLine("O Inimigo te encara, desconfiado.");
-                View.Interface.Await();
+                View.Interface.Await("O Inimigo te encara, desconfiado.");
             }
             else if (battleOptionChoiced == Models.Enums.BattleOptions.Correr) {
                 View.Interface.Header();
-                Console.WriteLine("Você fugiu da luta");
-                View.Interface.Await();
+                View.Interface.Await("Você fugiu da luta");
                 break;
             }
             else if (battleOptionChoiced == Models.Enums.BattleOptions.Inventario) {
                 View.Interface.Header();
-                Console.WriteLine("Nada na bolsa");
+                View.Interface.Await("Nada na bolsa");
                 break;
             }
             player.Damaged(enemy.Str);
