@@ -1,4 +1,6 @@
-﻿namespace RogueProgramingGame.Controllers;
+﻿using RogueProgramingGame.Models;
+
+namespace RogueProgramingGame.Controllers;
 
 public static class Game {
     public static void Start() {
@@ -18,7 +20,7 @@ public static class Game {
     public static void NewGame() {
         //Criando o jogador
         Models.Player jogador = new Models.Player();
-
+        Console.Clear();
         View.Interface.Header();
         jogador.ShowStats();
         Console.WriteLine($"Você jogará como {jogador.PlayerClass}, excelente escolha! Agora sim podemos dar inicio a sua jornada.");
@@ -27,11 +29,25 @@ public static class Game {
         //Batalhas
         string msgDeBatalha = "";
         string nomeInimigo = "";
-        string[] inimigosDisponiveis = { "Golem", "Troll", "Goblin", "Gargula", "Orc", "Slime", "Lobisomem", "Esqueleto", "Dinossauro", "Zumbi" };
+
+
+        Enemy[] inimigosDisponiveis = {
+            new Enemy{ Name = "Golem" },
+            new Enemy{ Name = "Troll" },
+            new Enemy{ Name = "Goblin" },
+            new Enemy{ Name = "Gargula" },
+            new Enemy{ Name = "Orc" },
+            new Enemy{ Name = "Slime" },
+            new Enemy{ Name = "Lobisomem" },
+            new Enemy{ Name = "Esqueleto" },
+            new Enemy{ Name = "Dinossauro" },
+            new Enemy{ Name = "Zumbi" }
+        };
+
         for (int i = 0; i < 5; i++) {
-            Models.Enemy enemy = new Models.Enemy();
+            Enemy enemy = new Enemy();
             Random random = new Random();
-            enemy.Name = inimigosDisponiveis[random.Next(0, inimigosDisponiveis.Length)];
+            enemy.Name = inimigosDisponiveis[random.Next(0, inimigosDisponiveis.Length)].Name;
 
             if (i == 0) {
                 msgDeBatalha = "Você está em uma floresta, olha ao seu redor e não vê nada, a não ser um inimigo.\nO que você faz?";
@@ -44,6 +60,7 @@ public static class Game {
         }
 
         //Fim do jogo
+        Console.Clear();
         View.Interface.Header();
         Console.WriteLine("Você chegou até o fim da sua jornada.");
         jogador.ShowStats();

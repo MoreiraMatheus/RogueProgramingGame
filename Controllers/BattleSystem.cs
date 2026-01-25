@@ -29,6 +29,7 @@ public static class BattleSystem {
     }
 
     private static void Lutar(Models.Player player, Models.Enemy enemy) {
+        Console.Clear();
         View.Interface.Header();
         enemy.Damaged(player.Str);
         View.Interface.Await($"Você acertou o seu inimigo.");
@@ -36,16 +37,19 @@ public static class BattleSystem {
     }
 
     private static void Aguardar() {
+        Console.Clear();
         View.Interface.Header();
         View.Interface.Await("O Inimigo te encara, desconfiado.");
     }
 
     private static void Correr() {
+        Console.Clear();
         View.Interface.Header();
         View.Interface.Await("Você fugiu da luta e evitou receber dano.");
     }
 
     private static void Inventario(Models.Player player) {
+        Console.Clear();
         View.Interface.Header();
         if (player.BackPack.Length >= 1) {
             Console.WriteLine("Itens na bolsa:");

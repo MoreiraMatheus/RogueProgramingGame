@@ -35,8 +35,12 @@ static class Interface{
 
         while (true) {
             optionToPrint = (int)optionSelected;
+
+            //TODO Elaborar a tela de batalha semelhante a uma batalha pokemon
+            Console.Clear();
             View.Interface.Header();
             InimigoAtual.ShowStats();
+            View.Interface.ShowVersus();
             JogadorAtual.ShowStats();
             View.Interface.ShowChoices(listOptions, listOptions[optionToPrint], false);
 

@@ -7,7 +7,6 @@ public class Enemy : Entity {
         View.Interface.ShowHP(Hp, MaxHp);
         View.Interface.MenuEmptyLine();
         View.Interface.Divider();
-        View.Interface.ShowVersus();
     }
 
     public Enemy() {
