@@ -13,7 +13,6 @@ static class Interface {
     }
 
     static public void Header() {
-        Console.Clear(); //TODO remover
         Divider();
         Console.WriteLine("\n\t\tRogue Programing Game\n");
         Divider();
@@ -118,6 +117,7 @@ static class Interface {
     }
     public static void ShowChoices(string[] options, string currentOption, bool showHeader=true) {
         if (showHeader) {
+            Console.Clear();
             Header();
         }
         foreach (string option in options) {

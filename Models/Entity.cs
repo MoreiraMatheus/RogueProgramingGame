@@ -8,6 +8,7 @@ public class Entity {
     public int Str = 0;
     public int Def = 0;
     public int Spd = 0;
+    public string sprite;
 
     public void ShowStatsSimple() {
         Console.WriteLine(Name);
